@@ -71,18 +71,11 @@ public class LineManager : MonoBehaviour
             _buildLine.Line.SetPosition(0, _initMousePos);
             _buildLine.Line.SetPosition(1, end);
         }
-        else
-        {
-            _buildLine.Line.SetPosition(0, _origin);
-            _buildLine.Line.SetPosition(1, _origin);
-        }
     }
 
     void SetUpBuildLine()
     {
         _buildLine = GameManager.Instance.LinePool.GetPooledObject().component;
-        _buildLine.Line.SetPosition(0, _origin);
-        _buildLine.Line.SetPosition(1, _origin);
     }
 
     private Vector2 GetMousePos()
@@ -115,7 +108,11 @@ public class LineManager : MonoBehaviour
         }
         line.SetPosition(0, start);
         line.SetPosition(1, end);
+        
         Energy -= (end - start).magnitude;
+
+        // this is done to avoid things from getting messed up
+        // in the middle area
         _clicked = false;
 
         // add collision
@@ -129,6 +126,10 @@ public class LineManager : MonoBehaviour
         // keep track of lines
         Lines.Add(lineObject.component);
 
+        // this is just to make sure that build line doesnt stay visible
+        // if you delete all lines
+        _buildLine.Line.SetPosition(0, _origin);
+        _buildLine.Line.SetPosition(1, _origin);
 
 
 
@@ -138,9 +139,12 @@ public class LineManager : MonoBehaviour
         var last = Lines.Count - 1;
         if (last >= 0)  
         {
+            // restore energy
             var p1 = Lines[last].Line.GetPosition(0);
             var p2 = Lines[last].Line.GetPosition(1);
             Energy += Vector2.Distance(p1, p2);
+
+            // deactivate line
             Lines[last].ReturnToPool();
             Lines[last].Collider.enabled=false;
             Lines.RemoveAt(last);
