@@ -655,11 +655,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
-    - target: {fileID: 8063296630950138906, guid: cfb087ecdbd324cee9ddf6e93e4a5370,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 422391419935257846, guid: cfb087ecdbd324cee9ddf6e93e4a5370,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -713,16 +708,6 @@ PrefabInstance:
     - target: {fileID: 422391419935257846, guid: cfb087ecdbd324cee9ddf6e93e4a5370,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7334572584868884221, guid: cfb087ecdbd324cee9ddf6e93e4a5370,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2703740145184374234, guid: cfb087ecdbd324cee9ddf6e93e4a5370,
-        type: 3}
-      propertyPath: m_BlockingMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
