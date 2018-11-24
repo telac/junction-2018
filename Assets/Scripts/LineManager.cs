@@ -9,18 +9,16 @@ public class LineManager : MonoBehaviour
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
-    private List<LineController> _lines;
 
     private void Awake()
     {
-        _buildLine = GameManager.Instance.LinePool.GetPooledObject().component;
-        SetUpBuildLine();
-        _origin = new Vector2(0, 0);
+
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        _origin = new Vector2(0, 0);
+        SetUpBuildLine();
     }
 
     // Update is called once per frame
@@ -57,6 +55,7 @@ public class LineManager : MonoBehaviour
 
     void SetUpBuildLine()
     {
+        _buildLine = GameManager.Instance.LinePool.GetPooledObject().component;
         _buildLine.Line.SetPosition(0, _origin);
         _buildLine.Line.SetPosition(1, _origin);
     }
@@ -75,18 +74,23 @@ public class LineManager : MonoBehaviour
         line.SetPosition(1, end);
         // add collision
         var collider = GameManager.Instance.LinePool.GetPooledObject().component.Collider;
+        collider.enabled = true;
         var points = new Vector2[2];
         points[0] = start;
         points[1] = end;
         collider.points = points;
 
-        //_lines.Add(lineController);
     }
 
     public void ResetLines() {
         foreach (var line in GameManager.Instance.LinePool.Pool)
         {
             line.component.ReturnToPool();
+            line.component.Collider.enabled = false;
         }
+        // Might be a good idea to make build line seperate
+        // from rest of the lines, or add a flag to the LineController
+        // that specifies whether a line is a build line or not
+        SetUpBuildLine();
     }
 }
