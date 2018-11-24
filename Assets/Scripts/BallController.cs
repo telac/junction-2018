@@ -9,17 +9,25 @@ public enum BallType
 
 public class BallController : MonoBehaviour, IPoolable
 {
-    // Start is called before the first frame update
-    void Start()
+    public LayerMask DarkLayerMask;
+    public LayerMask LightLayerMask;
+
+    [HideInInspector]
+    public BallType BallType;
+
+    public void SetBallType(BallType type)
     {
-        
+        BallType = type;
+        if (BallType == BallType.Dark)
+        {
+            gameObject.layer = DarkLayerMask;
+        }
+        else
+        {
+            gameObject.layer = LightLayerMask;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ResetState() { }
     public void ReturnToPool() { }
 }
