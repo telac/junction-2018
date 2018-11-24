@@ -22,5 +22,6 @@ public class Spawner : MonoBehaviour
     private void SpawnBall(BallType type)
     {
         var ball = GameManager.Instance.BallPool.GetPooledObject();
+        ball.component.SetBallType(type);
     }
 }

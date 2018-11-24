@@ -9,9 +9,6 @@ public enum BallType
 
 public class BallController : MonoBehaviour, IPoolable
 {
-    public LayerMask DarkLayerMask;
-    public LayerMask LightLayerMask;
-
     [HideInInspector]
     public BallType BallType;
 
@@ -20,11 +17,11 @@ public class BallController : MonoBehaviour, IPoolable
         BallType = type;
         if (BallType == BallType.Dark)
         {
-            gameObject.layer = DarkLayerMask;
+            gameObject.layer = LayerMask.NameToLayer("Dark");
         }
         else
         {
-            gameObject.layer = LightLayerMask;
+            gameObject.layer = LayerMask.NameToLayer("Light");
         }
     }
 
