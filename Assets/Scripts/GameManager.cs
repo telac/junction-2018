@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     public BallCameraController LightCamera;
     [HideInInspector]
     public BallCameraController DarkCamera;
+    [HideInInspector]
+    public BallController LightBall;
+    [HideInInspector]
+    public BallController DarkBall;
 
     private FadeUIController _fadeUIController;
     private float _fadeAmount;
