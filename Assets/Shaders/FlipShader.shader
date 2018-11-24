@@ -1,15 +1,9 @@
-﻿Shader "Unlit/ColorMapShaderLegacy"
+﻿Shader "Unlit/FlipShader"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Inverse ("Inverse", float) = 0.0
-        _ColorInverse("Color Inverse", float) = 0.0
-        _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
-        _HighlightColor ("Highlight Color", Color) = (0, 0, 0, 0)
-        _DarkestThreshold ("Darkest threshold", float) = 0.25
-        _DarkThreshold ("Dark threshold", float) = 0.5
-        _LightThreshold ("Light threshold", float) = 0.75
     }
     SubShader
     {
@@ -39,12 +33,6 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Inverse;
-            float _ColorInverse;
-            float4 _BaseColor;
-            float4 _HighlightColor;
-            float _DarkestThreshold;
-            float _DarkThreshold;
-            float _LightThreshold;
 
             v2f vert (appdata v)
             {
@@ -65,24 +53,6 @@
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-
-                col = _HighlightColor * col.r;
-
-                if (_ColorInverse > 0.5f) {
-                    col.rgb = 1 - col;
-                }
-
-                if (col.r <= _LightThreshold && col.r > _DarkThreshold) {
-                    col = col * _LightThreshold;
-                } else if (col.r <= _DarkThreshold && col.r > _DarkestThreshold) {
-                    col = col * _DarkThreshold;
-                } else if (col.r <= _DarkestThreshold) {
-                    col = col * _DarkestThreshold;
-                }
-
-                col = _BaseColor * col;
-
-                col.a = 1;
 
                 return col;
             }

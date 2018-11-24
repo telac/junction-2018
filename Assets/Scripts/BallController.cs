@@ -15,7 +15,7 @@ public class BallController : MonoBehaviour, IPoolable
     public void Play() {
         gameObject.GetComponent<Rigidbody2D>().simulated = true;
     }
-    
+
     public void Pause() {
         gameObject.GetComponent<Rigidbody2D>().simulated = false;
     }
@@ -37,8 +37,15 @@ public class BallController : MonoBehaviour, IPoolable
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
         gameObject.SetActive(true);
     }
+
     public void ReturnToPool() {
         //Debug.Log(gameObject);
         gameObject.SetActive(false);
+    }
+
+    public void Update() {
+        if (gameObject.transform.position.y < -11) {
+            GameManager.Instance.gameOver();
+        }
     }
 }
