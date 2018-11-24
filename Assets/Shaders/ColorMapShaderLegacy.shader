@@ -64,24 +64,21 @@
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-                //col = col * _BaseColor;
-
-                if (col.x <= _LightThreshold && col.x > _DarkThreshold) {
-                    col = col * _LightThreshold;
-                } else if (col.x <= _DarkThreshold && col.x > _DarkestThreshold) {
-                    col = col * _DarkThreshold;
-                } else if (col.x <= _DarkestThreshold) {
-                    col = col * _DarkestThreshold;
-                }
-
                 col = _HighlightColor * col.r;
 
                 if (_Inverse) {
                     col.rgb = 1 - col;
-                    //col = col.r * _BaseColor;
                 }
 
-                col = _BaseColor * col.r;
+                if (col.r <= _LightThreshold && col.r > _DarkThreshold) {
+                    col = col * _LightThreshold;
+                } else if (col.r <= _DarkThreshold && col.r > _DarkestThreshold) {
+                    col = col * _DarkThreshold;
+                } else if (col.r <= _DarkestThreshold) {
+                    col = col * _DarkestThreshold;
+                }
+
+                col = _BaseColor * col;
 
                 col.a = 1;
 

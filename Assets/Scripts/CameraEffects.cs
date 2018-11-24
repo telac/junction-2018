@@ -46,6 +46,13 @@ public class CameraEffects : MonoBehaviour
         if (_materialInstance == null) return;
 
         _materialInstance.SetInt("_Inverse", Inverse ? 1 : 0);
+
+#if UNITY_EDITOR
+        EffectMaterial.SetInt("_Inverse", Inverse ? 1 : 0);
+        Graphics.Blit(src, dest, EffectMaterial);
+#else
         Graphics.Blit(src, dest, _materialInstance);
+#endif
+
     }
 }
