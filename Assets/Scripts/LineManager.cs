@@ -52,7 +52,8 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (_clicked) CreateLine(_initMousePos, GetMousePos());
+            if (_clicked && Energy > 0.01f) CreateLine(_initMousePos, GetMousePos());
+            _clicked = false;
         }
         DrawTemporaryLine();
     }
@@ -108,12 +109,8 @@ public class LineManager : MonoBehaviour
         }
         line.SetPosition(0, start);
         line.SetPosition(1, end);
-        
-        Energy -= (end - start).magnitude;
 
-        // this is done to avoid things from getting messed up
-        // in the middle area
-        _clicked = false;
+        Energy -= (end - start).magnitude;
 
         // add collision
         var collider = lineObject.component.Collider;
@@ -130,9 +127,6 @@ public class LineManager : MonoBehaviour
         // if you delete all lines
         _buildLine.Line.SetPosition(0, _origin);
         _buildLine.Line.SetPosition(1, _origin);
-
-
-
     }
 
     public void Undo() {
