@@ -5,7 +5,7 @@ using UnityEngine;
 public class LineManager : MonoBehaviour
 {
 
-    private LineController _buildLine; 
+    private LineController _buildLine;
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
@@ -53,21 +53,30 @@ public class LineManager : MonoBehaviour
     }
 
     void SetUpBuildLine()
-    { 
+    {
         _buildLine.Line.SetPosition(0, _origin);
         _buildLine.Line.SetPosition(1, _origin);
     }
 
     private Vector2 GetMousePos()
     {
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
     }
 
     void CreateLine(Vector2 start, Vector2 end)
     {
+        // draw line
         var line = GameManager.Instance.LinePool.GetPooledObject().component.Line;
         line.material = new Material(Shader.Find("Sprites/Default"));
         line.SetPosition(0, start);
         line.SetPosition(1, end);
+        // add collision
+        var collider = GameManager.Instance.LinePool.GetPooledObject().component.Collider;
+        var points = new Vector2[2];
+        points[0] = start;
+        points[1] = end;
+        collider.points = points;
+
+
     }
 }
