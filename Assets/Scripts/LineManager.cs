@@ -58,7 +58,7 @@ public class LineManager : MonoBehaviour
             var start = _initMousePos;
             var end = GetMousePos();
             var dist = Vector2.Distance(start, end);
-            if (_clicked && Energy > MINIMUM_COST && dist > 0.2f)
+            if (_clicked && Energy > MINIMUM_COST && dist > 1f)
             {
                 CreateLine(start, end);
             } 
