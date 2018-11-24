@@ -9,7 +9,6 @@ public class LineManager : MonoBehaviour
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
-    private List<LineController> _lines;
 
     private void Awake()
     {
@@ -81,7 +80,6 @@ public class LineManager : MonoBehaviour
         points[1] = end;
         collider.points = points;
 
-        //_lines.Add(lineController);
     }
 
     public void ResetLines() {
