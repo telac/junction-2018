@@ -7,8 +7,6 @@ public class BallCameraController : MonoBehaviour
 {
     public BallType BallType;
 
-    public Material SceneCameraMaterial;
-
     // TODO: Tracking
 
     void Awake()
