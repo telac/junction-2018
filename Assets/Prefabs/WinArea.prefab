@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5897264248859527860}
   - component: {fileID: 5897264248859527858}
   - component: {fileID: 5897264248859527857}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WinArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
