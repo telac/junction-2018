@@ -15,11 +15,19 @@ public class GameManager : MonoBehaviour
     public BallPool BallPool;
     public LinePool LinePool;
     public GameState GameState;
+    public GameObject FadeUI;
 
     [HideInInspector]
     public BallCameraController LightCamera;
     [HideInInspector]
     public BallCameraController DarkCamera;
+
+    private FadeUIController _fadeUIController;
+    private float _fadeAmount;
+    private float _fadeTarget;
+    private float _fadeTimer;
+    private float _fadeTime;
+    private float _fadeStart;
 
     // Use this for initialization;
     void Awake()
@@ -34,6 +42,12 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        var fadeUI = Instantiate(FadeUI);
+        fadeUI.transform.parent = transform;
+        _fadeUIController = fadeUI.GetComponent<FadeUIController>();
+        _fadeUIController.SetFade(0f);
+
         RestartLevel();
     }
 
@@ -41,6 +55,7 @@ public class GameManager : MonoBehaviour
     {
         // restart whole level
         GameState = GameState.Play;
+        //pause(); // after development start game with pause state
     }
 
     void ResetLevel()
@@ -48,18 +63,45 @@ public class GameManager : MonoBehaviour
         // reset ball positions
     }
 
-    void nextLevel()
+    public void EndLevel(string targetScene = "")
+    {
+        if (GameState == GameState.ChangeLevel) return;
+        if (NextLevel == "lvl01")
+            NextLevel = "lvl02";
+        else if (NextLevel == "lvl02")
+            NextLevel = "lvl01";
+        if (targetScene == "")
+            targetScene = NextLevel;
+
+        GameState = GameState.ChangeLevel;
+
+        StartCoroutine(StartLevelEndFade(targetScene));
+    }
+
+    public IEnumerator StartLevelEndFade(string nextScene)
+    {
+        //while (true) yield return new WaitForEndOfFrame();
+
+        //if (LevelEndInput == 2) nextScene = "menu";
+
+        //ExitingLevel = true;
+        Fade(1.25f, 1f);
+        yield return new WaitForSeconds(1.25f);
+        //ChangeLevel(nextScene);
+        nextLevel(nextScene);
+    }
+
+    void nextLevel(string sceneName)
     {
         foreach (var ball in BallPool.Pool)
         {
             ball.component.ReturnToPool();
         }
-        if (NextLevel == "lvl01")
-            NextLevel = "lvl02";
-        else if (NextLevel == "lvl02")
-            NextLevel = "lvl01";
+
         // load next level
-        SceneManager.LoadScene(NextLevel);
+        SceneManager.LoadScene(sceneName);
+        Fade(1.25f, 0f);
+        pause();
     }
 
     void Update()
@@ -75,26 +117,58 @@ public class GameManager : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.N))
             {
-                nextLevel();
+                EndLevel();
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (GameState == GameState.Pause) {
-                    GameState = GameState.Play;
-                    foreach (var ball in BallPool.Pool)
-                    {
-                        ball.component.Play();
-                    }
+                    play();
                 }
                 else if (GameState == GameState.Play) {
-                    GameState = GameState.Pause;
-                    foreach (var ball in BallPool.Pool)
-                    {
-                        ball.component.Pause();
-                    }
+                    pause();
                 }
             }
         }
+
+        if (_fadeTimer > 0f)
+        {
+            _fadeTimer -= Time.deltaTime;
+
+            var fadeT = 1f - _fadeTimer / _fadeTime;
+            _fadeAmount = Mathf.Lerp(_fadeStart, _fadeTarget, fadeT);
+
+            _fadeUIController.SetFade(_fadeAmount);
+
+            if (_fadeTimer <= 0f)
+            {
+                _fadeTimer = 0f;
+                _fadeAmount = _fadeTarget;
+            }
+        }
+    }
+
+    private void pause() {
+        GameState = GameState.Pause;
+        foreach (var ball in BallPool.Pool)
+        {
+            ball.component.Pause();
+        }
+    }
+
+    private void play() {
+        GameState = GameState.Play;
+        foreach (var ball in BallPool.Pool)
+        {
+            ball.component.Play();
+        }
+    }
+
+    public void Fade(float time, float target)
+    {
+        _fadeTime = time;
+        _fadeTimer = time;
+        _fadeTarget = target;
+        _fadeStart = _fadeAmount;
     }
 
 }

@@ -17,6 +17,7 @@ public class WinCollision : MonoBehaviour
         if (other.tag == "LightBall")
         {
             _spriteRenderer.color = Color.green;
+            GameManager.Instance.EndLevel();
         }
     }
 
