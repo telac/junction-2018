@@ -11,6 +11,7 @@ public class LineManager : MonoBehaviour
     private bool _clicked;
     private float _midPoint;
     private float _inversedMidPoint;
+    private BallCameraController _LightCamera;
 
     void Awake()
     {
@@ -23,6 +24,8 @@ public class LineManager : MonoBehaviour
         _midPoint = Screen.height / 2;
         _inversedMidPoint = (Screen.height / 4) * 3;
         _origin = new Vector2(0, 0);
+        // should _camera perhaps be public in BallCameraController?
+        _LightCamera = GameManager.Instance.LightCamera;
         SetUpBuildLine();
     }
 
@@ -78,7 +81,7 @@ public class LineManager : MonoBehaviour
             Vector2 inversePos = new Vector2(mousPos.x, _midPoint - mousPos.y);
             var pos = Camera.allCameras[1].ScreenToWorldPoint(inversePos);
             return pos;
-        }
+        }   
     }
 
     void CreateLine(Vector2 start, Vector2 end)
