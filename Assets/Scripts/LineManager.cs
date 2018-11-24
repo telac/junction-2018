@@ -5,13 +5,14 @@ using UnityEngine;
 public class LineManager : MonoBehaviour
 {
 
+
     private LineController _buildLine;
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
     private float _midPoint;
     private float _inversedMidPoint;
-    private BallCameraController _LightCamera;
+
 
     void Awake()
     {
@@ -24,8 +25,6 @@ public class LineManager : MonoBehaviour
         _midPoint = Screen.height / 2;
         _inversedMidPoint = (Screen.height / 4) * 3;
         _origin = new Vector2(0, 0);
-        // should _camera perhaps be public in BallCameraController?
-        _LightCamera = GameManager.Instance.LightCamera;
         SetUpBuildLine();
     }
 
@@ -73,13 +72,13 @@ public class LineManager : MonoBehaviour
         var mousPos = Input.mousePosition;
         if (mousPos.y >= _midPoint)
         {
-            var pos =  Camera.allCameras[0].ScreenToWorldPoint(mousPos);
+            var pos =  GameManager.Instance.LightCamera.Camera.ScreenToWorldPoint(mousPos);
             return pos;
         } 
         else
         {
             Vector2 inversePos = new Vector2(mousPos.x, _midPoint - mousPos.y);
-            var pos = Camera.allCameras[1].ScreenToWorldPoint(inversePos);
+            var pos = GameManager.Instance.DarkCamera.Camera.ScreenToWorldPoint(inversePos);
             return pos;
         }   
     }
