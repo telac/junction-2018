@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
 
     public void Undo()
     {
-
+        LineManager.Undo();
     }
 
     public void Fade(float time, float target)
