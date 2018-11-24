@@ -55,7 +55,17 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (_clicked && Energy > MINIMUM_COST) CreateLine(_initMousePos, GetMousePos());
+            var start = _initMousePos;
+            var end = GetMousePos();
+            var dist = Vector2.Distance(start, end);
+            if (_clicked && Energy > MINIMUM_COST && dist > 0.2f)
+            {
+                CreateLine(start, end);
+            } 
+            // this is just to make sure that build line doesnt stay visible
+            // if you delete all lines
+            _buildLine.Line.SetPosition(0, _origin);
+            _buildLine.Line.SetPosition(1, _origin);
             _clicked = false;
         }
         DrawTemporaryLine();
@@ -125,11 +135,6 @@ public class LineManager : MonoBehaviour
 
         // keep track of lines
         Lines.Add(lineObject.component);
-
-        // this is just to make sure that build line doesnt stay visible
-        // if you delete all lines
-        _buildLine.Line.SetPosition(0, _origin);
-        _buildLine.Line.SetPosition(1, _origin);
     }
 
     public void Undo() {
