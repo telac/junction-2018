@@ -2,13 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PoolableParticleSystem : MonoBehaviour
+public class PoolableParticleSystem : MonoBehaviour, IPoolable
 {
     private ParticleSystem _ps;
 
     void Awake()
     {
         _ps = GetComponentInChildren<ParticleSystem>();
+    }
+
+    public void ResetState()
+    {
+
+    }
+
+    public void ReturnToPool()
+    {
+
     }
 
     void Update()

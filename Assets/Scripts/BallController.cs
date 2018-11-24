@@ -12,11 +12,15 @@ public class BallController : MonoBehaviour, IPoolable
     [HideInInspector]
     public BallType BallType;
 
-    public void Play() {
+    private bool _spawnedGoalSFX;
+
+    public void Play()
+    {
         gameObject.GetComponent<Rigidbody2D>().simulated = true;
     }
 
-    public void Pause() {
+    public void Pause()
+    {
         gameObject.GetComponent<Rigidbody2D>().simulated = false;
     }
 
@@ -33,19 +37,37 @@ public class BallController : MonoBehaviour, IPoolable
         }
     }
 
-    public void ResetState() {
+    public void ResetState()
+    {
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
         gameObject.SetActive(true);
     }
 
-    public void ReturnToPool() {
+    public void ReturnToPool()
+    {
         //Debug.Log(gameObject);
         gameObject.SetActive(false);
+        _spawnedGoalSFX = false;
     }
 
-    public void Update() {
-        if (gameObject.transform.position.y < -12) {
+    public void Update()
+    {
+        if (gameObject.transform.position.y < -12)
+        {
             GameManager.Instance.gameOver();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("WinCollision"))
+        {
+            if (!_spawnedGoalSFX)
+            {
+                _spawnedGoalSFX = true;
+                var sfx = GameManager.Instance.GoalSFXPool.GetPooledObject();
+                sfx.gameObject.transform.position = transform.position;
+            }
         }
     }
 }
