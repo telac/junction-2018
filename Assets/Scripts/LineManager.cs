@@ -110,7 +110,7 @@ public class LineManager : MonoBehaviour
         line.SetPosition(0, start);
         line.SetPosition(1, end);
 
-        Energy -= (end - start).magnitude;
+        Energy -= (end - start).magnitude + 5;
 
         // add collision
         var collider = lineObject.component.Collider;
@@ -136,7 +136,7 @@ public class LineManager : MonoBehaviour
             // restore energy
             var p1 = Lines[last].Line.GetPosition(0);
             var p2 = Lines[last].Line.GetPosition(1);
-            Energy += Vector2.Distance(p1, p2);
+            Energy += Vector2.Distance(p1, p2) + 5;
 
             // deactivate line
             Lines[last].ReturnToPool();
