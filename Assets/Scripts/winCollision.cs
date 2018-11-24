@@ -6,6 +6,8 @@ public class WinCollision : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
 
+
+
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
