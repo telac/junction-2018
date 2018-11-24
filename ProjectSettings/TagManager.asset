@@ -19,10 +19,10 @@ TagManager:
   - Common
   - Dark
   - Light
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - CommonHazard
+  - LightHazard
+  - DarkHazard
   - 
   - 
   - 

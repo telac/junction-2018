@@ -80,8 +80,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.017637845
-        value: 0.08333421
+        time: 0.03527319
+        value: 0.21590257
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Line: {fileID: 7480675994622987162}
   Collider: {fileID: 6252669203301877125}
-  CollisionWidth: 0.1
+  CollisionWidth: 0.2
 --- !u!68 &6252669203301877125
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.2
   m_Points:
   - {x: -0.5, y: 0}
   - {x: 0.5, y: 0}
