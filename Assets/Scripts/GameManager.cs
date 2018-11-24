@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         GameState = GameState.Begin;
         Debug.Log("Press space to play");
+        GameState = GameState.Play; //TODO REMOVE BEFORE COMMIT!
     }
 
     void ResetLevel()

@@ -44,7 +44,7 @@ public class BallController : MonoBehaviour, IPoolable
     }
 
     public void Update() {
-        if (gameObject.transform.position.y < -11) {
+        if (gameObject.transform.position.y < -12) {
             GameManager.Instance.gameOver();
         }
     }
