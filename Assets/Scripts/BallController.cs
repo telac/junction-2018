@@ -30,10 +30,12 @@ public class BallController : MonoBehaviour, IPoolable
         if (BallType == BallType.Dark)
         {
             gameObject.layer = LayerMask.NameToLayer("Dark");
+            gameObject.tag = "DarkBall";
         }
         else
         {
             gameObject.layer = LayerMask.NameToLayer("Light");
+            gameObject.tag = "LightBall";
         }
     }
 

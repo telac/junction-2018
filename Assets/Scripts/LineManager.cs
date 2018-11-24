@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class LineManager : MonoBehaviour
 {
+    
     public List<LineController> Lines;
     public float Energy;
+    public const float MINIMUM_COST = 5.0f;
+    public const float ENERGY_CAP = 30.0f;
 
     private LineController _buildLine;
     private Vector2 _initMousePos;
@@ -28,7 +31,7 @@ public class LineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Energy = 30f;
+        Energy = ENERGY_CAP;
         Lines = new List<LineController>();
         _midPoint = Screen.height / 2;
         _threshold = Screen.height * 0.05f;
@@ -52,14 +55,15 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (_clicked) CreateLine(_initMousePos, GetMousePos());
+            if (_clicked && Energy > MINIMUM_COST) CreateLine(_initMousePos, GetMousePos());
+            _clicked = false;
         }
         DrawTemporaryLine();
     }
 
     void DrawTemporaryLine()
     {
-        if (_clicked)
+        if (_clicked && Energy > MINIMUM_COST)
         {
             var end = GetMousePos();
             if(Vector2.Distance(_initMousePos, end) > Energy) 
@@ -108,12 +112,8 @@ public class LineManager : MonoBehaviour
         }
         line.SetPosition(0, start);
         line.SetPosition(1, end);
-        
-        Energy -= (end - start).magnitude;
 
-        // this is done to avoid things from getting messed up
-        // in the middle area
-        _clicked = false;
+        Energy -= (end - start).magnitude + MINIMUM_COST;
 
         // add collision
         var collider = lineObject.component.Collider;
@@ -130,9 +130,6 @@ public class LineManager : MonoBehaviour
         // if you delete all lines
         _buildLine.Line.SetPosition(0, _origin);
         _buildLine.Line.SetPosition(1, _origin);
-
-
-
     }
 
     public void Undo() {
@@ -142,7 +139,7 @@ public class LineManager : MonoBehaviour
             // restore energy
             var p1 = Lines[last].Line.GetPosition(0);
             var p2 = Lines[last].Line.GetPosition(1);
-            Energy += Vector2.Distance(p1, p2);
+            Energy += Vector2.Distance(p1, p2) + MINIMUM_COST;
 
             // deactivate line
             Lines[last].ReturnToPool();
