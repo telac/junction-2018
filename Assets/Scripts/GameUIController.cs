@@ -10,7 +10,16 @@ public class GameUIController : MonoBehaviour
     public Button RestartButton;
     public Button UndoButton;
 
+    private float _energyInitialWidth;
     public Image EnergyBar;
+
+    private Canvas _canvas;
+
+    void Awake()
+    {
+        _canvas = GetComponentInChildren<Canvas>();
+        _energyInitialWidth = EnergyBar.rectTransform.rect.width / _canvas.scaleFactor;
+    }
 
     private void Update()
     {
@@ -28,8 +37,10 @@ public class GameUIController : MonoBehaviour
 
         EnergyBar.gameObject.SetActive(true);
         var energyT = GameManager.Instance.LineManager.Energy / 30f;
-        energyT = Mathf.Clamp(energyT, 0f, 1f);
-        EnergyBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1060f * energyT);
+        energyT = Mathf.Clamp(energyT, 0.01f, 1f);
+        var offset = -10 - (1f - energyT) * _energyInitialWidth;
+        //EnergyBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _energyInitialWidth * energyT);
+        EnergyBar.rectTransform.offsetMax = new Vector2(offset, EnergyBar.rectTransform.offsetMax.y);
 
         // Restart is always available
         RestartButton.gameObject.SetActive(true);
