@@ -23,5 +23,6 @@ public class Spawner : MonoBehaviour
     {
         var ball = GameManager.Instance.BallPool.GetPooledObject();
         ball.component.SetBallType(type);
+        ball.component.transform.position = gameObject.transform.position;
     }
 }

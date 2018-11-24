@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class winCollision : MonoBehaviour
+public class WinCollision : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
 
