@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WinAreaAnim : MonoBehaviour
 {
+    public float Speed;
+    public float Radius;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class WinAreaAnim : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.localScale *= Mathf.Sin(Time.fixedDeltaTime);
+        transform.localScale += Vector3.one * Radius * Mathf.Sin(Speed * Time.fixedDeltaTime);
     }
 }
