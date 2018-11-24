@@ -10,7 +10,9 @@ public class DualCameraController : MonoBehaviour
     public CameraEffects LightCamera;
     public CameraEffects DarkCamera;
 
+    [SerializeField]
     private BallCameraController _lightCameraController;
+    [SerializeField]
     private BallCameraController _darkCameraController;
 
     void OnEnable()

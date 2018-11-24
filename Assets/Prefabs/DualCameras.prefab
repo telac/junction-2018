@@ -219,6 +219,8 @@ MonoBehaviour:
   Configuration: {fileID: 11400000, guid: 844e27a442aaa8e4990173b40ca00365, type: 2}
   LightCamera: {fileID: 5876538636141552455}
   DarkCamera: {fileID: 1131193079953707096}
+  _lightCameraController: {fileID: 237147450}
+  _darkCameraController: {fileID: 264079187}
 --- !u!1 &7565363661980180173
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +285,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 3361
+    m_Bits: 2849
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -392,7 +394,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2849
+    m_Bits: 3361
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
