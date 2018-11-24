@@ -52,7 +52,7 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (_clicked && Energy > 0.01f) CreateLine(_initMousePos, GetMousePos());
+            if (_clicked && Energy > 5f) CreateLine(_initMousePos, GetMousePos());
             _clicked = false;
         }
         DrawTemporaryLine();
@@ -60,7 +60,7 @@ public class LineManager : MonoBehaviour
 
     void DrawTemporaryLine()
     {
-        if (_clicked)
+        if (_clicked && Energy > 5)
         {
             var end = GetMousePos();
             if(Vector2.Distance(_initMousePos, end) > Energy) 
