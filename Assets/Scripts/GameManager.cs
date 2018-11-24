@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
+public enum GameState
+{
+    Play, Pause, Build, ChangeLevel
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
     public string NextLevel;
     public BallPool BallPool;
     public LinePool LinePool;
+    public GameState GameState;
 
     [HideInInspector]
     public BallCameraController LightCamera;
@@ -34,6 +40,7 @@ public class GameManager : MonoBehaviour
     void RestartLevel()
     {
         // restart whole level
+        GameState = GameState.Pause;
     }
 
     void ResetLevel()
@@ -57,18 +64,37 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetLevel();
-        }
-        else if (Input.GetKeyDown(KeyCode.T))
-        {
-            RestartLevel();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            nextLevel();
+        if (GameState == GameState.Play || GameState == GameState.Pause) {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ResetLevel();
+            }
+            else if (Input.GetKeyDown(KeyCode.T))
+            {
+                RestartLevel();
+            }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                nextLevel();
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (GameState == GameState.Pause) {
+                    GameState = GameState.Play;
+                    foreach (var ball in BallPool.Pool)
+                    {
+                        ball.component.Play();
+                    }
+                }
+                else if (GameState == GameState.Play) {
+                    GameState = GameState.Pause;
+                    foreach (var ball in BallPool.Pool)
+                    {
+                        ball.component.Pause();
+                    }
+                }
+            }
         }
     }
-
+    
 }

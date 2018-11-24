@@ -12,6 +12,14 @@ public class BallController : MonoBehaviour, IPoolable
     [HideInInspector]
     public BallType BallType;
 
+    public void Play() {
+        gameObject.GetComponent<Rigidbody2D>().simulated = true;
+    }
+    
+    public void Pause() {
+        gameObject.GetComponent<Rigidbody2D>().simulated = false;
+    }
+
     public void SetBallType(BallType type)
     {
         BallType = type;
