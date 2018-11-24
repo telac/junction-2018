@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
-    public int level = 1;
+    public string NextLevel;
     public BallPool BallPool;
 
     public BallCameraController LightCamera;
@@ -39,8 +40,16 @@ public class GameManager : MonoBehaviour
 
     void nextLevel()
     {
-        level += 1;
+        foreach (var ball in BallPool.Pool)
+        {
+            ball.component.ReturnToPool();
+        }
+        if (NextLevel == "lvl01")
+            NextLevel = "lvl02";
+        else if (NextLevel == "lvl02")
+            NextLevel = "lvl01";
         // load next level
+        SceneManager.LoadScene(NextLevel);
     }
 
     void Update()
@@ -52,6 +61,10 @@ public class GameManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.T))
         {
             RestartLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            nextLevel();
         }
     }
 

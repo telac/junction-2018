@@ -25,6 +25,12 @@ public class BallController : MonoBehaviour, IPoolable
         }
     }
 
-    public void ResetState() { }
-    public void ReturnToPool() { }
+    public void ResetState() {
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+        gameObject.SetActive(true);
+    }
+    public void ReturnToPool() {
+        //Debug.Log(gameObject);
+        gameObject.SetActive(false);
+    }
 }

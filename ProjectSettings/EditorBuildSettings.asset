@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/henri.unity
     guid: 3cb878ea3c31c9f41a50e6e59d777db8
+  - enabled: 1
+    path: Assets/Scenes/lvl01.unity
+    guid: 140f735324a7de7418857a9458376d4c
+  - enabled: 1
+    path: Assets/Scenes/lvl02.unity
+    guid: 5b1d285d933586f4eaa0cece8113a0c6
   m_configObjects: {}
