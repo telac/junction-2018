@@ -41,7 +41,7 @@ public class LineManager : MonoBehaviour
     void Update()
     {
         var mPos = Input.mousePosition;
-        
+
         if (mPos.y > _midPoint + _threshold || mPos.y < _midPoint - _threshold)
         {
             if (Input.GetMouseButtonDown(0))
@@ -52,8 +52,7 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            _clicked = false;
-            CreateLine(_initMousePos, GetMousePos());
+            if (_clicked) CreateLine(_initMousePos, GetMousePos());
         }
         DrawTemporaryLine();
     }
@@ -117,6 +116,7 @@ public class LineManager : MonoBehaviour
         line.SetPosition(0, start);
         line.SetPosition(1, end);
         Energy -= (end - start).magnitude;
+        _clicked = false;
 
         // add collision
         var collider = lineObject.component.Collider;
@@ -125,7 +125,10 @@ public class LineManager : MonoBehaviour
         points[0] = start;
         points[1] = end;
         collider.points = points;
+
+        // keep track of lines
         Lines.Add(lineObject.component);
+
 
 
 
