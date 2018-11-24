@@ -37,8 +37,12 @@ public class GameUIController : MonoBehaviour
 
         EnergyBar.gameObject.SetActive(true);
         var energyT = GameManager.Instance.LineManager.Energy / 30f;
-        energyT = Mathf.Clamp(energyT, 0.01f, 1f);
-        var offset = -10 - (1f - energyT) * _energyInitialWidth;
+        if (energyT < 5f / 30f)
+        {
+            energyT = 0f;
+        }
+        energyT = Mathf.Clamp(energyT, 0f, 1f);
+        var offset = -20 - (1f - energyT) * _energyInitialWidth;
         //EnergyBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _energyInitialWidth * energyT);
         EnergyBar.rectTransform.offsetMax = new Vector2(offset, EnergyBar.rectTransform.offsetMax.y);
 

@@ -11,7 +11,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
-    public string NextLevel;
+    public string CurrentLevel;
     public BallPool BallPool;
     public LinePool LinePool;
     public GameState GameState;
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         if (GameState == GameState.ChangeLevel) return;
         if (targetScene == "")
         {
-            targetScene = NextLevel;
+            targetScene = NextLevel(CurrentLevel);
         }
 
         GameState = GameState.ChangeLevel;
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
         LineManager.ResetLines();
         // load next level
         SceneManager.LoadScene(sceneName);
+        CurrentLevel = sceneName;
         Fade(1.25f, 0f);
         Pause();
     }
@@ -211,6 +212,10 @@ public class GameManager : MonoBehaviour
             GameState = GameState.GameOver;
         }
 
+    }
+
+    public string NextLevel(string curLvl) {
+        return "";
     }
 
 }
