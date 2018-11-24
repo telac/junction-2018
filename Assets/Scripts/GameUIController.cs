@@ -10,6 +10,8 @@ public class GameUIController : MonoBehaviour
     public Button RestartButton;
     public Button UndoButton;
 
+    public Image EnergyBar;
+
     private void Update()
     {
         PlayButton.gameObject.SetActive(false);
@@ -17,10 +19,17 @@ public class GameUIController : MonoBehaviour
         RestartButton.gameObject.SetActive(false);
         UndoButton.gameObject.SetActive(false);
 
+        EnergyBar.gameObject.SetActive(false);
+
         if (GameManager.Instance.GameState == GameState.ChangeLevel)
         {
             return;
         }
+
+        EnergyBar.gameObject.SetActive(true);
+        var energyT = GameManager.Instance.LineManager.Energy / 30f;
+        energyT = Mathf.Clamp(energyT, 0f, 1f);
+        EnergyBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1060f * energyT);
 
         // Restart is always available
         RestartButton.gameObject.SetActive(true);
