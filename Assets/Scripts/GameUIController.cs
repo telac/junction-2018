@@ -25,14 +25,6 @@ public class GameUIController : MonoBehaviour
         {
             PauseButton.gameObject.SetActive(true);
         }
-        if (GameManager.Instance.GameState == GameState.Pause)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
-        if (GameManager.Instance.GameState == GameState.Pause)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
     }
 
     public void PausePress()
