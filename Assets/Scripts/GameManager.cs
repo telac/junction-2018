@@ -15,10 +15,13 @@ public class GameManager : MonoBehaviour
     public BallPool BallPool;
     public LinePool LinePool;
     public GameState GameState;
-    public GameObject FadeUI;
-    public Spawner Spawner;
-    public LineManager LineManager;
 
+    [HideInInspector]
+    public GameObject FadeUI;
+    [HideInInspector]
+    public Spawner Spawner;
+    [HideInInspector]
+    public LineManager LineManager;
     [HideInInspector]
     public BallCameraController LightCamera;
     [HideInInspector]
