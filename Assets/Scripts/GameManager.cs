@@ -189,6 +189,7 @@ public class GameManager : MonoBehaviour
 
     public void Undo()
     {
+        Debug.Log("Call Undo from UI");
         LineManager.Undo();
     }
 
