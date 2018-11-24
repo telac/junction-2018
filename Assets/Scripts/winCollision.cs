@@ -14,7 +14,7 @@ public class winCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "LightBall")
         {
             _spriteRenderer.color = Color.green;
         }
@@ -22,7 +22,7 @@ public class winCollision : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "LightBall")
         {
             _spriteRenderer.color = Color.red;
         }
