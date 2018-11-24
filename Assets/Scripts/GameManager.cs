@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     void RestartLevel()
     {
         // restart whole level
-        GameState = GameState.Pause;
+        GameState = GameState.Play;
     }
 
     void ResetLevel()
@@ -96,5 +96,5 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
+
 }

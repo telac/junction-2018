@@ -60,7 +60,6 @@ public class LineManager : MonoBehaviour
 
     private Vector2 GetMousePos()
     {
-        Debug.Log(Camera.allCameras[0]);
         return Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
     }
 
