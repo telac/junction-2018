@@ -12,6 +12,7 @@ public class LineManager : MonoBehaviour
     private bool _clicked;
     private float _midPoint;
     private float _inversedMidPoint;
+    private List<LineController> _lines = new List<LineController>();
 
 
     void Awake()
@@ -98,7 +99,18 @@ public class LineManager : MonoBehaviour
         points[0] = start;
         points[1] = end;
         collider.points = points;
+        _lines.Add(lineObject.component);
 
+    }
+
+    public void Undo() {
+        var last = _lines.Count - 1;
+        if (last >= 0) 
+        {
+            _lines[last].ReturnToPool();
+            _lines[last].Collider.enabled=false;
+            _lines.RemoveAt(last);
+        }
     }
 
     public void ResetLines()

@@ -109,6 +109,10 @@ public class GameManager : MonoBehaviour
     {
         if (GameState == GameState.Play || GameState == GameState.Pause)
         {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                LineManager.Undo();
+            }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 ResetLevel();
