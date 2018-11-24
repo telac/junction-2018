@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    Play, Pause, Build, ChangeLevel
+    Play, Pause, Build, ChangeLevel, GameOver
 }
 
 public class GameManager : MonoBehaviour
@@ -56,14 +56,7 @@ public class GameManager : MonoBehaviour
         _fadeUIController = fadeUI.GetComponent<FadeUIController>();
         _fadeUIController.SetFade(0f);
 
-        RestartLevel();
-    }
-
-    void RestartLevel()
-    {
-        // restart whole level
         GameState = GameState.Play;
-        //Pause(); // after development start game with pause state
     }
 
     void ResetLevel()
@@ -71,7 +64,6 @@ public class GameManager : MonoBehaviour
         // reset ball positions
         Spawner.ResetBalls();
         LineManager.ResetLines();
-
     }
 
     public void EndLevel(string targetScene = "")
@@ -83,20 +75,15 @@ public class GameManager : MonoBehaviour
         }
 
         GameState = GameState.ChangeLevel;
+        Debug.Log("GG go to next level");
 
         StartCoroutine(StartLevelEndFade(targetScene));
     }
 
     public IEnumerator StartLevelEndFade(string nextScene)
     {
-        //while (true) yield return new WaitForEndOfFrame();
-
-        //if (LevelEndInput == 2) nextScene = "menu";
-
-        //ExitingLevel = true;
         Fade(1.25f, 1f);
         yield return new WaitForSeconds(1.25f);
-        //ChangeLevel(nextScene);
         GotoNextLevel(nextScene);
     }
 
@@ -123,10 +110,6 @@ public class GameManager : MonoBehaviour
             {
                 ResetLevel();
             }
-            else if (Input.GetKeyDown(KeyCode.T))
-            {
-                RestartLevel();
-            }
             else if (Input.GetKeyDown(KeyCode.N))
             {
                 EndLevel();
@@ -141,6 +124,13 @@ public class GameManager : MonoBehaviour
                 {
                     Pause();
                 }
+            }
+        }
+        else if (GameState == GameState.GameOver) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ResetLevel();
+                Play();
             }
         }
 
@@ -163,6 +153,7 @@ public class GameManager : MonoBehaviour
 
     private void Pause()
     {
+        Debug.Log("Game paused, press spacebar");
         GameState = GameState.Pause;
         foreach (var ball in BallPool.Pool)
         {
@@ -185,6 +176,15 @@ public class GameManager : MonoBehaviour
         _fadeTimer = time;
         _fadeTarget = target;
         _fadeStart = _fadeAmount;
+    }
+
+    public void gameOver() {
+        if (GameState != GameState.GameOver) {
+            Debug.Log("GG skeletons got you");
+            Pause();
+            GameState = GameState.GameOver;
+        }
+
     }
 
 }
