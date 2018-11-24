@@ -43,21 +43,19 @@ public class LineManager : MonoBehaviour
         var mPos = Input.mousePosition;
         
         if (mPos.y > _midPoint + _threshold || mPos.y < _midPoint - _threshold)
-            {
-
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 _initMousePos = GetMousePos();
                 _clicked = true;
             }
-            if (Input.GetMouseButtonUp(0))
-            {
-                _clicked = false;
-                CreateLine(_initMousePos, GetMousePos());
-            }
-            DrawTemporaryLine();
         }
-        
+        if (Input.GetMouseButtonUp(0))
+        {
+            _clicked = false;
+            CreateLine(_initMousePos, GetMousePos());
+        }
+        DrawTemporaryLine();
     }
 
     void DrawTemporaryLine()
