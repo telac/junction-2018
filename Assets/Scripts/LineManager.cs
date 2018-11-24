@@ -9,6 +9,8 @@ public class LineManager : MonoBehaviour
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
+    private float _midPoint;
+    private float _inversedMidPoint;
 
     void Awake()
     {
@@ -18,6 +20,8 @@ public class LineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _midPoint = Screen.height / 2;
+        _inversedMidPoint = (Screen.height / 4) * 3;
         _origin = new Vector2(0, 0);
         SetUpBuildLine();
     }
@@ -63,7 +67,18 @@ public class LineManager : MonoBehaviour
 
     private Vector2 GetMousePos()
     {
-        return Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
+        var mousPos = Input.mousePosition;
+        if (mousPos.y >= _midPoint)
+        {
+            var pos =  Camera.allCameras[0].ScreenToWorldPoint(mousPos);
+            return pos;
+        } 
+        else
+        {
+            Vector2 inversePos = new Vector2(mousPos.x, _midPoint - mousPos.y);
+            var pos = Camera.allCameras[1].ScreenToWorldPoint(inversePos);
+            return pos;
+        }
     }
 
     void CreateLine(Vector2 start, Vector2 end)
@@ -94,6 +109,6 @@ public class LineManager : MonoBehaviour
         // Might be a good idea to make build line seperate
         // from rest of the lines, or add a flag to the LineController
         // that specifies whether a line is a build line or not
-        SetUpBuildLine();
+        Start();
     }
 }
