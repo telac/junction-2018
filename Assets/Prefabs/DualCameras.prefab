@@ -325,8 +325,9 @@ MonoBehaviour:
   BallType: 0
   FollowTarget: {fileID: 0}
   FollowSmoothing: 0
-  LeftDeadZone: 0.8
-  RightDeadZone: 0.1
+  LeftDeadZone: 0.6
+  RightDeadZone: 0.6
+  Camera: {fileID: 0}
 --- !u!1 &8660657057737556275
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,5 +434,6 @@ MonoBehaviour:
   BallType: 1
   FollowTarget: {fileID: 0}
   FollowSmoothing: 0
-  LeftDeadZone: 0.8
-  RightDeadZone: 0.1
+  LeftDeadZone: 0.6
+  RightDeadZone: 0.6
+  Camera: {fileID: 0}
