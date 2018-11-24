@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameUIController : MonoBehaviour
 {
-    public void OnPauseButtonPress()
+    public void PausePress()
     {
-        Debug.Log("TÄTTÄÄÄ");
+
     }
 }
