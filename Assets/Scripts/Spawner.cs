@@ -9,7 +9,10 @@ public class Spawner : MonoBehaviour
 
     void Awake()
     {
-        GameManager.Instance.Spawner = gameObject.GetComponent<Spawner>();
+        if(GameManager.Instance.Spawner == null) 
+        {
+            GameManager.Instance.Spawner = gameObject.GetComponent<Spawner>();
+        }
         if (LightSpawn)
         {
             SpawnBall(BallType.Light);
@@ -34,6 +37,7 @@ public class Spawner : MonoBehaviour
             GameManager.Instance.DarkBall = ball.component;
         }
         ball.component.Pause();
+        ball.component.Play(); //TODO REMOVE BEFORE COMMIT!
     }
 
     public void ResetBalls() {

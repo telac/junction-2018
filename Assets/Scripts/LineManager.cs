@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LineManager : MonoBehaviour
 {
-
+    public List<LineController> Lines;
 
     private LineController _buildLine;
     private Vector2 _initMousePos;
@@ -12,16 +12,21 @@ public class LineManager : MonoBehaviour
     private bool _clicked;
     private float _midPoint;
     private float _inversedMidPoint;
-
+    
 
     void Awake()
     {
-        GameManager.Instance.LineManager = this;
+        if(GameManager.Instance.LineManager == null)
+        {
+            GameManager.Instance.LineManager = this;
+        }
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Lines = new List<LineController>();
         _midPoint = Screen.height / 2;
         _inversedMidPoint = (Screen.height / 4) * 3;
         _origin = new Vector2(0, 0);
@@ -98,7 +103,21 @@ public class LineManager : MonoBehaviour
         points[0] = start;
         points[1] = end;
         collider.points = points;
+        Lines.Add(lineObject.component);
 
+
+
+    }
+
+    public void Undo() {
+        var last = Lines.Count - 1;
+        if (last >= 0)  
+        {
+
+            Lines[last].ReturnToPool();
+            Lines[last].Collider.enabled=false;
+            Lines.RemoveAt(last);
+        }
     }
 
     public void ResetLines()
@@ -111,6 +130,7 @@ public class LineManager : MonoBehaviour
         // Might be a good idea to make build line seperate
         // from rest of the lines, or add a flag to the LineController
         // that specifies whether a line is a build line or not
+
         Start();
     }
 }
