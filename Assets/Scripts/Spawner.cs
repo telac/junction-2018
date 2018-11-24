@@ -9,7 +9,10 @@ public class Spawner : MonoBehaviour
 
     void Awake()
     {
-        GameManager.Instance.Spawner = gameObject.GetComponent<Spawner>();
+        if(GameManager.Instance.Spawner == null) 
+        {
+            GameManager.Instance.Spawner = gameObject.GetComponent<Spawner>();
+        }
         if (LightSpawn)
         {
             SpawnBall(BallType.Light);
