@@ -60,11 +60,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Press space to play");
     }
 
-    void ResetLevel()
+    public void ResetLevel()
     {
         // reset ball positions
         Spawner.ResetBalls();
-        LineManager.ResetLines();
+        //LineManager.ResetLines(); 
+        // Lines are removed with undo
         GameState = GameState.Begin;
         Debug.Log("Press space to play");
     }
@@ -133,14 +134,16 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else if (GameState == GameState.GameOver) {
+        else if (GameState == GameState.GameOver)
+        {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ResetLevel();
                 Play();
             }
         }
-        else if (GameState == GameState.Begin) {
+        else if (GameState == GameState.Begin)
+        {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Play();
@@ -164,7 +167,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         Debug.Log("Game paused, press spacebar");
         GameState = GameState.Pause;
@@ -174,13 +177,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Play()
+    public void Play()
     {
         GameState = GameState.Play;
         foreach (var ball in BallPool.Pool)
         {
             ball.component.Play();
         }
+    }
+
+    public void Undo()
+    {
+
     }
 
     public void Fade(float time, float target)
@@ -191,8 +199,10 @@ public class GameManager : MonoBehaviour
         _fadeStart = _fadeAmount;
     }
 
-    public void gameOver() {
-        if (GameState != GameState.GameOver) {
+    public void gameOver()
+    {
+        if (GameState != GameState.GameOver)
+        {
             Debug.Log("GG skeletons got you");
             Pause();
             GameState = GameState.GameOver;
