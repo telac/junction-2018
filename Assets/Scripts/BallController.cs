@@ -68,7 +68,7 @@ public class BallController : MonoBehaviour, IPoolable
             {
                 _spawnedGoalSFX = true;
                 var sfx = GameManager.Instance.GoalSFXPool.GetPooledObject();
-                sfx.gameObject.transform.position = transform.position;
+                sfx.gameObject.transform.position = other.transform.position;
             }
         }
     }
