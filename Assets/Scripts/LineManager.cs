@@ -10,10 +10,11 @@ public class LineManager : MonoBehaviour
     private Vector2 _origin;
     private bool _clicked;
 
-    private void Awake()
+    void Awake()
     {
-
+        GameManager.Instance.LineManager = this;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,12 +69,13 @@ public class LineManager : MonoBehaviour
     void CreateLine(Vector2 start, Vector2 end)
     {
         // draw line
-        var line = GameManager.Instance.LinePool.GetPooledObject().component.Line;
+        var lineObject = GameManager.Instance.LinePool.GetPooledObject();
+        var line = lineObject.component.Line;
         line.material = new Material(Shader.Find("Sprites/Default"));
         line.SetPosition(0, start);
         line.SetPosition(1, end);
         // add collision
-        var collider = GameManager.Instance.LinePool.GetPooledObject().component.Collider;
+        var collider = lineObject.component.Collider;
         collider.enabled = true;
         var points = new Vector2[2];
         points[0] = start;
@@ -82,7 +84,8 @@ public class LineManager : MonoBehaviour
 
     }
 
-    public void ResetLines() {
+    public void ResetLines()
+    {
         foreach (var line in GameManager.Instance.LinePool.Pool)
         {
             line.component.ReturnToPool();
