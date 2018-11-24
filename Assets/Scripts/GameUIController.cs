@@ -12,12 +12,36 @@ public class GameUIController : MonoBehaviour
 
     private void Update()
     {
-
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(false);
         RestartButton.gameObject.SetActive(false);
         UndoButton.gameObject.SetActive(false);
-        if(GameManager.Instance.GameState == GameState.Pause)
+
+        if (GameManager.Instance.GameState == GameState.ChangeLevel)
+        {
+            return;
+        }
+
+        // Restart is always available
+        RestartButton.gameObject.SetActive(true);
+        RestartButton.interactable = true;
+
+        // If in begin or play, make restart inactive
+        if (GameManager.Instance.GameState == GameState.Begin || GameManager.Instance.GameState == GameState.Play)
+        {
+            RestartButton.interactable = false;
+        }
+
+        if (GameManager.Instance.GameState == GameState.Begin)
+        {
+            PlayButton.gameObject.SetActive(true);
+        }
+
+        // TODO: If canUndo
+
+
+
+        if (GameManager.Instance.GameState == GameState.Pause)
         {
             PlayButton.gameObject.SetActive(true);
         }
@@ -25,33 +49,25 @@ public class GameUIController : MonoBehaviour
         {
             PauseButton.gameObject.SetActive(true);
         }
-        if (GameManager.Instance.GameState == GameState.Pause)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
-        if (GameManager.Instance.GameState == GameState.Pause)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
     }
 
     public void PausePress()
     {
-
+        GameManager.Instance.Pause();
     }
 
     public void PlayPress()
     {
-
+        GameManager.Instance.Play();
     }
 
     public void RestartPress()
     {
-
+        GameManager.Instance.ResetLevel();
     }
 
     public void UndoPress()
     {
-
+        GameManager.Instance.Undo();
     }
 }
