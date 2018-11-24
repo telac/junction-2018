@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public int level = 1;
     public BallPool BallPool;
 
+    public BallCameraController LightCamera;
+    public BallCameraController DarkCamera;
+
     // Use this for initialization;
     void Awake()
     {
@@ -24,7 +27,8 @@ public class GameManager : MonoBehaviour
         RestartLevel();
     }
 
-    void RestartLevel() {
+    void RestartLevel()
+    {
         // restart whole level
     }
 
@@ -44,7 +48,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetLevel();
-        } else if (Input.GetKeyDown(KeyCode.T))
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
         {
             RestartLevel();
         }

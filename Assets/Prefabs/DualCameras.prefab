@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 7338673567037031879}
   - component: {fileID: 3000011524058796313}
   - component: {fileID: 7565363661980180174}
+  - component: {fileID: 8771385002104664604}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
@@ -127,6 +128,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c86cdb320529c94582a4da7f25aad57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8771385002104664604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565363661980180173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d16c79132c3ae042b15bad878bf5f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BallType: 0
 --- !u!1 &8660657057737556275
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1177181479815439432}
   - component: {fileID: 6517430020020614838}
+  - component: {fileID: 2083724755672008906}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -200,3 +215,16 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2083724755672008906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8660657057737556275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d16c79132c3ae042b15bad878bf5f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BallType: 1
