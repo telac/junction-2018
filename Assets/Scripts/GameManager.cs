@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    Play, Pause, Build, ChangeLevel, GameOver
+    Begin, Play, Pause, Build, ChangeLevel, GameOver
 }
 
 public class GameManager : MonoBehaviour
@@ -56,7 +56,8 @@ public class GameManager : MonoBehaviour
         _fadeUIController = fadeUI.GetComponent<FadeUIController>();
         _fadeUIController.SetFade(0f);
 
-        GameState = GameState.Play;
+        GameState = GameState.Begin;
+        Debug.Log("Press space to play");
     }
 
     void ResetLevel()
@@ -64,6 +65,8 @@ public class GameManager : MonoBehaviour
         // reset ball positions
         Spawner.ResetBalls();
         LineManager.ResetLines();
+        GameState = GameState.Begin;
+        Debug.Log("Press space to play");
     }
 
     public void EndLevel(string targetScene = "")
@@ -130,6 +133,12 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ResetLevel();
+                Play();
+            }
+        }
+        else if (GameState == GameState.Begin) {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 Play();
             }
         }

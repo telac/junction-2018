@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour
         {
             GameManager.Instance.DarkBall = ball.component;
         }
+        ball.component.Pause();
     }
 
     public void ResetBalls() {

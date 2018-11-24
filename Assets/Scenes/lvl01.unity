@@ -336,6 +336,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!20 &1259945078 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 159360228, guid: aef9d5ebf4949f743adf36a2f235a783,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085961671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1292125162 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 818865111, guid: aef9d5ebf4949f743adf36a2f235a783,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085961671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1402422977
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +542,16 @@ PrefabInstance:
       propertyPath: LineManager
       value: 
       objectReference: {fileID: 2049430239}
+    - target: {fileID: 8470741375166523179, guid: a0443a30c904fda4aa96db5d4e00c8bc,
+        type: 3}
+      propertyPath: LightCamera
+      value: 
+      objectReference: {fileID: 1259945078}
+    - target: {fileID: 8470741375166523179, guid: a0443a30c904fda4aa96db5d4e00c8bc,
+        type: 3}
+      propertyPath: DarkCamera
+      value: 
+      objectReference: {fileID: 1292125162}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0443a30c904fda4aa96db5d4e00c8bc, type: 3}
 --- !u!114 &2049430239 stripped

@@ -10,8 +10,8 @@ public class BallCameraController : MonoBehaviour
     public float FollowSmoothing;
     public float LeftDeadZone;
     public float RightDeadZone;
+    public Camera Camera;
 
-    private Camera _camera;
     private Vector3 _initialPosition;
 
     void Awake()
@@ -19,7 +19,7 @@ public class BallCameraController : MonoBehaviour
         if (!GameManager.Instance) return;
 
         _initialPosition = transform.position;
-        _camera = GetComponent<Camera>();
+        Camera = GetComponent<Camera>();
 
         if (BallType == BallType.Dark)
         {
@@ -35,9 +35,9 @@ public class BallCameraController : MonoBehaviour
     {
         if (FollowTarget == null) return;
 
-        var aspectRatio = _camera.aspect;
-        var leftEdge = transform.position.x - _camera.orthographicSize * aspectRatio * LeftDeadZone;
-        var rightEdge = transform.position.x + _camera.orthographicSize * aspectRatio * RightDeadZone;
+        var aspectRatio = Camera.aspect;
+        var leftEdge = transform.position.x - Camera.orthographicSize * aspectRatio * LeftDeadZone;
+        var rightEdge = transform.position.x + Camera.orthographicSize * aspectRatio * RightDeadZone;
 
         var targetX = FollowTarget.transform.position.x;
 
