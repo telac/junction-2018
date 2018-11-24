@@ -1592,6 +1592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinArea
       objectReference: {fileID: 0}
+    - target: {fileID: 5897264248859527861, guid: 04ea28ff8ae053f46b3331bc55b115ad,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5897264248859527859, guid: 04ea28ff8ae053f46b3331bc55b115ad,
         type: 3}
       propertyPath: m_LocalPosition.x

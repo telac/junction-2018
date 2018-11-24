@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
 
         GameState = GameState.Begin;
         Debug.Log("Press space to play");
-        GameState = GameState.Play; //TODO REMOVE BEFORE COMMIT!
     }
 
     public void ResetLevel()
@@ -189,6 +188,7 @@ public class GameManager : MonoBehaviour
 
     public void Undo()
     {
+        Debug.Log("Call Undo from UI");
         LineManager.Undo();
     }
 
