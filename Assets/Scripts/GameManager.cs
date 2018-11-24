@@ -188,7 +188,8 @@ public class GameManager : MonoBehaviour
 
     public void Undo()
     {
-
+        Debug.Log("Call Undo from UI");
+        LineManager.Undo();
     }
 
     public void Fade(float time, float target)

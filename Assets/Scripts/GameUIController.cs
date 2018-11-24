@@ -26,6 +26,9 @@ public class GameUIController : MonoBehaviour
         RestartButton.gameObject.SetActive(true);
         RestartButton.interactable = true;
 
+        UndoButton.gameObject.SetActive(true);
+        UndoButton.interactable = true;
+
         // If in begin or play, make restart inactive
         if (GameManager.Instance.GameState == GameState.Begin || GameManager.Instance.GameState == GameState.Play)
         {
@@ -37,9 +40,10 @@ public class GameUIController : MonoBehaviour
             PlayButton.gameObject.SetActive(true);
         }
 
-        // TODO: If canUndo
-
-
+        if (GameManager.Instance.LineManager.Lines.Count == 0)
+        {
+            UndoButton.interactable = false;
+        }
 
         if (GameManager.Instance.GameState == GameState.Pause)
         {
