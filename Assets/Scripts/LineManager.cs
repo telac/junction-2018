@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class LineManager : MonoBehaviour
 {
+    
     public List<LineController> Lines;
     public float Energy;
+    public const float MINIMUM_COST = 5.0f;
+    public const float ENERGY_CAP = 30.0f;
 
     private LineController _buildLine;
     private Vector2 _initMousePos;
@@ -28,7 +31,7 @@ public class LineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Energy = 30f;
+        Energy = ENERGY_CAP;
         Lines = new List<LineController>();
         _midPoint = Screen.height / 2;
         _threshold = Screen.height * 0.05f;
@@ -52,7 +55,7 @@ public class LineManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (_clicked && Energy > 5f) CreateLine(_initMousePos, GetMousePos());
+            if (_clicked && Energy > MINIMUM_COST) CreateLine(_initMousePos, GetMousePos());
             _clicked = false;
         }
         DrawTemporaryLine();
@@ -60,7 +63,7 @@ public class LineManager : MonoBehaviour
 
     void DrawTemporaryLine()
     {
-        if (_clicked && Energy > 5)
+        if (_clicked && Energy > MINIMUM_COST)
         {
             var end = GetMousePos();
             if(Vector2.Distance(_initMousePos, end) > Energy) 
@@ -110,7 +113,7 @@ public class LineManager : MonoBehaviour
         line.SetPosition(0, start);
         line.SetPosition(1, end);
 
-        Energy -= (end - start).magnitude + 5;
+        Energy -= (end - start).magnitude + MINIMUM_COST;
 
         // add collision
         var collider = lineObject.component.Collider;
@@ -136,7 +139,7 @@ public class LineManager : MonoBehaviour
             // restore energy
             var p1 = Lines[last].Line.GetPosition(0);
             var p2 = Lines[last].Line.GetPosition(1);
-            Energy += Vector2.Distance(p1, p2) + 5;
+            Energy += Vector2.Distance(p1, p2) + MINIMUM_COST;
 
             // deactivate line
             Lines[last].ReturnToPool();
