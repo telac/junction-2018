@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
     public int level = 1;
     public BallPool BallPool;
+    public LinePool LinePool;
 
+    [HideInInspector]
     public BallCameraController LightCamera;
+    [HideInInspector]
     public BallCameraController DarkCamera;
 
     // Use this for initialization;
