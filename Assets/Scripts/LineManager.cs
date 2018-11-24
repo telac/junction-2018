@@ -9,8 +9,6 @@ public class LineManager : MonoBehaviour
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
-    //prefab these too?
-    private AnimationCurve _buildCurve = new AnimationCurve();
 
     private void Awake()
     {
@@ -29,7 +27,6 @@ public class LineManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("hello");
             _initMousePos = GetMousePos();
             _clicked = true;
         }
@@ -56,13 +53,9 @@ public class LineManager : MonoBehaviour
     }
 
     void SetUpBuildLine()
-    {
-        _buildCurve.AddKey(0, 0.1f);
-        _buildCurve.AddKey(1, 0.1f);
-        _buildLine.Line.widthCurve = _buildCurve;   
+    { 
         _buildLine.Line.SetPosition(0, _origin);
         _buildLine.Line.SetPosition(1, _origin);
-
     }
 
     private Vector2 GetMousePos()
@@ -73,10 +66,6 @@ public class LineManager : MonoBehaviour
     void CreateLine(Vector2 start, Vector2 end)
     {
         var line = GameManager.Instance.LinePool.GetPooledObject().component.Line;
-        AnimationCurve curve = new AnimationCurve();
-        curve.AddKey(0, 0.1f);
-        curve.AddKey(1, 0.1f);
-        line.widthCurve = curve;
         line.material = new Material(Shader.Find("Sprites/Default"));
         line.SetPosition(0, start);
         line.SetPosition(1, end);
