@@ -159,6 +159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallType: 0
+  FollowTarget: {fileID: 0}
+  FollowSmoothing: 0
+  LeftDeadZone: 0.8
+  RightDeadZone: 0.1
 --- !u!1 &8660657057737556275
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,3 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BallType: 1
+  FollowTarget: {fileID: 0}
+  FollowSmoothing: 0
+  LeftDeadZone: 0.8
+  RightDeadZone: 0.1
