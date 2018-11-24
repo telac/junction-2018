@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public LinePool LinePool;
     public GameState GameState;
     public GameObject FadeUI;
+    public Spawner Spawner;
 
     [HideInInspector]
     public BallCameraController LightCamera;
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour
     void ResetLevel()
     {
         // reset ball positions
+        Spawner.ResetBalls();
     }
 
     public void EndLevel(string targetScene = "")
