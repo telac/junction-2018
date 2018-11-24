@@ -5,6 +5,8 @@ using UnityEngine;
 public class LineController : MonoBehaviour, IPoolable
 {
     public LineRenderer Line;
+    public EdgeCollider2D Collider;
+    public float CollisionWidth;
 
 
     void Start()
