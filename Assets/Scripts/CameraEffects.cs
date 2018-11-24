@@ -27,6 +27,7 @@ public sealed class CameraFlipRenderer : PostProcessEffectRenderer<CameraFlip>
 public class CameraEffects : MonoBehaviour
 {
     public bool Inverse;
+    public bool ColorInverse;
     public Material EffectMaterial;
 
     private Material _materialInstance;
@@ -45,10 +46,12 @@ public class CameraEffects : MonoBehaviour
     {
         if (_materialInstance == null) return;
 
-        _materialInstance.SetInt("_Inverse", Inverse ? 1 : 0);
+        _materialInstance.SetFloat("_Inverse", Inverse ? 1.0f : 0.0f);
+        _materialInstance.SetFloat("_ColorInverse", ColorInverse ? 1.0f : 0.0f);
 
 #if UNITY_EDITOR
-        EffectMaterial.SetInt("_Inverse", Inverse ? 1 : 0);
+        EffectMaterial.SetFloat("_Inverse", Inverse ? 1.0f : 0.0f);
+        EffectMaterial.SetFloat("_ColorInverse", ColorInverse ? 1.0f : 0.0f);
         Graphics.Blit(src, dest, EffectMaterial);
 #else
         Graphics.Blit(src, dest, _materialInstance);
