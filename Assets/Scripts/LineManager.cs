@@ -11,6 +11,7 @@ public class LineManager : MonoBehaviour
     private Vector2 _origin;
     private bool _clicked;
     private float _midPoint;
+    private float _threshold;
     private float _inversedMidPoint;
     
 
@@ -28,6 +29,7 @@ public class LineManager : MonoBehaviour
     {
         Lines = new List<LineController>();
         _midPoint = Screen.height / 2;
+        _threshold = Screen.height * 0.05f;
         _inversedMidPoint = (Screen.height / 4) * 3;
         _origin = new Vector2(0, 0);
         SetUpBuildLine();
@@ -36,19 +38,24 @@ public class LineManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var mPos = Input.mousePosition;
 
+        if (mPos.y > _midPoint + _threshold || mPos.y < _midPoint - _threshold)
+            {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _initMousePos = GetMousePos();
-            _clicked = true;
+            if (Input.GetMouseButtonDown(0))
+            {
+                _initMousePos = GetMousePos();
+                _clicked = true;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                _clicked = false;
+                CreateLine(_initMousePos, GetMousePos());
+            }
+            DrawTemporaryLine();
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            _clicked = false;
-            CreateLine(_initMousePos, GetMousePos());
-        }
-        DrawTemporaryLine();
+        
     }
 
     void DrawTemporaryLine()
