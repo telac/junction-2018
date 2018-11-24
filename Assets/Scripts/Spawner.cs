@@ -37,7 +37,6 @@ public class Spawner : MonoBehaviour
             GameManager.Instance.DarkBall = ball.component;
         }
         ball.component.Pause();
-        ball.component.Play(); //TODO REMOVE BEFORE COMMIT!
     }
 
     public void ResetBalls() {

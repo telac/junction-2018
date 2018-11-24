@@ -40,9 +40,10 @@ public class GameUIController : MonoBehaviour
             PlayButton.gameObject.SetActive(true);
         }
 
-        // TODO: If canUndo
-        //UndoButton.interactable = false;
-
+        if (GameManager.Instance.LineManager.Lines.Count == 0)
+        {
+            UndoButton.interactable = false;
+        }
 
         if (GameManager.Instance.GameState == GameState.Pause)
         {

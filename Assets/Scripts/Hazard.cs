@@ -6,7 +6,7 @@ public class Hazard : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "LightBall")
+        if (other.tag == "LightBall" || other.tag == "DarkBall")
         {
             GameManager.Instance.gameOver();
         }
