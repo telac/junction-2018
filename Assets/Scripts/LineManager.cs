@@ -9,6 +9,7 @@ public class LineManager : MonoBehaviour
     private Vector2 _initMousePos;
     private Vector2 _origin;
     private bool _clicked;
+    private List<LineController> _lines;
 
     private void Awake()
     {
@@ -25,6 +26,8 @@ public class LineManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (Input.GetMouseButtonDown(0))
         {
             _initMousePos = GetMousePos();
@@ -77,6 +80,13 @@ public class LineManager : MonoBehaviour
         points[1] = end;
         collider.points = points;
 
+        //_lines.Add(lineController);
+    }
 
+    public void ResetLines() {
+        foreach (var line in GameManager.Instance.LinePool.Pool)
+        {
+            line.component.ReturnToPool();
+        }
     }
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState;
     public GameObject FadeUI;
     public Spawner Spawner;
+    public LineManager LineManager;
 
     [HideInInspector]
     public BallCameraController LightCamera;
@@ -67,6 +68,8 @@ public class GameManager : MonoBehaviour
     {
         // reset ball positions
         Spawner.ResetBalls();
+        LineManager.ResetLines();
+
     }
 
     public void EndLevel(string targetScene = "")
@@ -99,11 +102,13 @@ public class GameManager : MonoBehaviour
 
     void nextLevel(string sceneName)
     {
+        // reset balls
         foreach (var ball in BallPool.Pool)
         {
             ball.component.ReturnToPool();
         }
-
+        // reset lines
+        LineManager.ResetLines();
         // load next level
         SceneManager.LoadScene(sceneName);
         Fade(1.25f, 0f);

@@ -19,8 +19,15 @@ public class LineController : MonoBehaviour, IPoolable
     {
 
     }
-    public void ResetState() { }
-    public void ReturnToPool() { }
+    public void ResetState() 
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void ReturnToPool() 
+    { 
+        gameObject.SetActive(false);
+    }
 
 
 
