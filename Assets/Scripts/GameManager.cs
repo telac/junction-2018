@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public LinePool LinePool;
     public GameState GameState;
 
+    public ParticleSystemPool GoalSFXPool;
+
     public GameObject FadeUI;
     [HideInInspector]
     public Spawner Spawner;
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartLevelEndFade(string nextScene)
     {
+        yield return new WaitForSeconds(1f);
         Fade(1.25f, 1f);
         yield return new WaitForSeconds(1.25f);
         GotoNextLevel(nextScene);
@@ -188,7 +191,6 @@ public class GameManager : MonoBehaviour
 
     public void Undo()
     {
-        Debug.Log("Call Undo from UI");
         LineManager.Undo();
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LineManager : MonoBehaviour
 {
     public List<LineController> Lines;
+    public float Energy;
 
     private LineController _buildLine;
     private Vector2 _initMousePos;
@@ -27,6 +28,7 @@ public class LineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Energy = 30f;
         Lines = new List<LineController>();
         _midPoint = Screen.height / 2;
         _threshold = Screen.height * 0.05f;
@@ -39,7 +41,7 @@ public class LineManager : MonoBehaviour
     void Update()
     {
         var mPos = Input.mousePosition;
-
+        
         if (mPos.y > _midPoint + _threshold || mPos.y < _midPoint - _threshold)
             {
 
@@ -62,8 +64,15 @@ public class LineManager : MonoBehaviour
     {
         if (_clicked)
         {
+            var end = GetMousePos();
+            if(Vector2.Distance(_initMousePos, end) > Energy) 
+            {
+                var absDirection = (end - _initMousePos);
+                var norDirection = absDirection / absDirection.magnitude;
+                end = _initMousePos + norDirection * (Energy);
+            }
             _buildLine.Line.SetPosition(0, _initMousePos);
-            _buildLine.Line.SetPosition(1, GetMousePos());
+            _buildLine.Line.SetPosition(1, end);
         }
         else
         {
@@ -101,8 +110,16 @@ public class LineManager : MonoBehaviour
         var lineObject = GameManager.Instance.LinePool.GetPooledObject();
         var line = lineObject.component.Line;
         line.material = new Material(Shader.Find("Sprites/Default"));
+        if(Vector2.Distance(_initMousePos, GetMousePos()) > Energy) 
+        {
+            var absDirection = (end - start);
+            var norDirection = absDirection / absDirection.magnitude;
+            end = start + norDirection * (Energy);
+        }
         line.SetPosition(0, start);
         line.SetPosition(1, end);
+        Energy -= (end - start).magnitude;
+
         // add collision
         var collider = lineObject.component.Collider;
         collider.enabled = true;
@@ -120,7 +137,9 @@ public class LineManager : MonoBehaviour
         var last = Lines.Count - 1;
         if (last >= 0)  
         {
-
+            var p1 = Lines[last].Line.GetPosition(0);
+            var p2 = Lines[last].Line.GetPosition(1);
+            Energy += Vector2.Distance(p1, p2);
             Lines[last].ReturnToPool();
             Lines[last].Collider.enabled=false;
             Lines.RemoveAt(last);
