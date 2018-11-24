@@ -75,6 +75,7 @@ public class LineManager : MonoBehaviour
         line.SetPosition(1, end);
         // add collision
         var collider = GameManager.Instance.LinePool.GetPooledObject().component.Collider;
+        collider.enabled = true;
         var points = new Vector2[2];
         points[0] = start;
         points[1] = end;
