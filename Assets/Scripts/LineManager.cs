@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LineManager : MonoBehaviour
 {
-    
+
     public List<LineController> Lines;
     public float Energy;
     public const float MINIMUM_COST = 5.0f;
@@ -17,15 +18,15 @@ public class LineManager : MonoBehaviour
     private float _midPoint;
     private float _threshold;
     private float _inversedMidPoint;
-    
+
 
     void Awake()
     {
-        if(GameManager.Instance.LineManager == null)
+        if (GameManager.Instance.LineManager == null)
         {
             GameManager.Instance.LineManager = this;
         }
-        
+
     }
 
     // Start is called before the first frame update
@@ -43,6 +44,9 @@ public class LineManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "credits") return;
+        if (SceneManager.GetActiveScene().name == "mainMenu") return;
+
         var mPos = Input.mousePosition;
 
         if (mPos.y > _midPoint + _threshold || mPos.y < _midPoint - _threshold)
@@ -61,7 +65,7 @@ public class LineManager : MonoBehaviour
             if (_clicked && Energy > MINIMUM_COST && dist > 1f)
             {
                 CreateLine(start, end);
-            } 
+            }
             // this is just to make sure that build line doesnt stay visible
             // if you delete all lines
             _buildLine.Line.SetPosition(0, _origin);
@@ -76,7 +80,7 @@ public class LineManager : MonoBehaviour
         if (_clicked && Energy > MINIMUM_COST)
         {
             var end = GetMousePos();
-            if(Vector2.Distance(_initMousePos, end) > Energy) 
+            if (Vector2.Distance(_initMousePos, end) > Energy)
             {
                 var absDirection = (end - _initMousePos);
                 var norDirection = absDirection / absDirection.magnitude;
@@ -97,15 +101,15 @@ public class LineManager : MonoBehaviour
         var mousPos = Input.mousePosition;
         if (mousPos.y >= _midPoint)
         {
-            var pos =  GameManager.Instance.LightCamera.Camera.ScreenToWorldPoint(mousPos);
+            var pos = GameManager.Instance.LightCamera.Camera.ScreenToWorldPoint(mousPos);
             return pos;
-        } 
+        }
         else
         {
             Vector2 inversePos = new Vector2(mousPos.x, _midPoint - mousPos.y);
             var pos = GameManager.Instance.DarkCamera.Camera.ScreenToWorldPoint(inversePos);
             return pos;
-        }   
+        }
     }
 
     void CreateLine(Vector2 start, Vector2 end)
@@ -114,7 +118,7 @@ public class LineManager : MonoBehaviour
         var lineObject = GameManager.Instance.LinePool.GetPooledObject();
         var line = lineObject.component.Line;
         line.material = new Material(Shader.Find("Sprites/Default"));
-        if(Vector2.Distance(_initMousePos, GetMousePos()) > Energy) 
+        if (Vector2.Distance(_initMousePos, GetMousePos()) > Energy)
         {
             var absDirection = (end - start);
             var norDirection = absDirection / absDirection.magnitude;
@@ -137,9 +141,10 @@ public class LineManager : MonoBehaviour
         Lines.Add(lineObject.component);
     }
 
-    public void Undo() {
+    public void Undo()
+    {
         var last = Lines.Count - 1;
-        if (last >= 0)  
+        if (last >= 0)
         {
             // restore energy
             var p1 = Lines[last].Line.GetPosition(0);
@@ -148,7 +153,7 @@ public class LineManager : MonoBehaviour
 
             // deactivate line
             Lines[last].ReturnToPool();
-            Lines[last].Collider.enabled=false;
+            Lines[last].Collider.enabled = false;
             Lines.RemoveAt(last);
         }
     }

@@ -1,23 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrollText : MonoBehaviour
 {
+    public Text CreditsText;
+    private Canvas _canvas;
     public float ScrollSpeed;
     private int _count;
-    // Start is called before the first frame update
-    void Start()
+    private float _startY;
+
+    void Awake()
     {
         _count = 1;
+        _canvas = GetComponent<Canvas>();
+        _startY = CreditsText.rectTransform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * ScrollSpeed);
+        //transform.Translate(Vector3.up * Time.deltaTime * ScrollSpeed);
+        CreditsText.rectTransform.position += Vector3.up * Time.deltaTime * ScrollSpeed;
 
-        if(transform.position.y > 30)
+        if (CreditsText.rectTransform.position.y > 18)
         {
             _count += 1;
             if (_count % 2 == 0)
@@ -34,12 +41,13 @@ public class ScrollText : MonoBehaviour
             }
 
             // sori henri
-            var camera = Camera.allCameras[1];
-            var aspectRatio = camera.aspect;
-            var bottom = transform.position.y - camera.orthographicSize * aspectRatio;
-            var screenBottom = new Vector2(transform.position.x, bottom - 50);
-            var inWorld = Camera.allCameras[1].ScreenToWorldPoint(screenBottom);
-            transform.position = screenBottom;
+            // REEEEEEEEEEEEEEEEEEEEEE
+            //var camera = GameManager.Instance.LightCamera.Camera;
+            //var aspectRatio = camera.aspect;
+            //var bottom = camera.transform.position.y - camera.orthographicSize * aspectRatio;
+            //var screenBottom = new Vector2(transform.position.x, bottom - 2);
+            //var inWorld = Camera.allCameras[1].ScreenToWorldPoint(screenBottom);
+            CreditsText.rectTransform.position = new Vector3(CreditsText.rectTransform.position.x, _startY, CreditsText.rectTransform.position.z);
         }
     }
 }

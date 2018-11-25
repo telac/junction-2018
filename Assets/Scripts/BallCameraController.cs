@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallCameraController : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class BallCameraController : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "credits") return;
+        if (SceneManager.GetActiveScene().name == "mainMenu") return;
+
         if (FollowTarget == null) return;
 
         var aspectRatio = Camera.aspect;

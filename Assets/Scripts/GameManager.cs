@@ -118,6 +118,25 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (_fadeTimer > 0f)
+        {
+            _fadeTimer -= Time.deltaTime;
+
+            var fadeT = 1f - _fadeTimer / _fadeTime;
+            _fadeAmount = Mathf.Lerp(_fadeStart, _fadeTarget, fadeT);
+
+            _fadeUIController.SetFade(_fadeAmount);
+
+            if (_fadeTimer <= 0f)
+            {
+                _fadeTimer = 0f;
+                _fadeAmount = _fadeTarget;
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "credits") return;
+        if (SceneManager.GetActiveScene().name == "mainMenu") return;
+
         if (GameState == GameState.Play || GameState == GameState.Pause)
         {
             if (Input.GetKeyDown(KeyCode.Z))
@@ -157,22 +176,6 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Play();
-            }
-        }
-
-        if (_fadeTimer > 0f)
-        {
-            _fadeTimer -= Time.deltaTime;
-
-            var fadeT = 1f - _fadeTimer / _fadeTime;
-            _fadeAmount = Mathf.Lerp(_fadeStart, _fadeTarget, fadeT);
-
-            _fadeUIController.SetFade(_fadeAmount);
-
-            if (_fadeTimer <= 0f)
-            {
-                _fadeTimer = 0f;
-                _fadeAmount = _fadeTarget;
             }
         }
     }
@@ -235,15 +238,14 @@ public class GameManager : MonoBehaviour
                 return "final05";
             case "final05":
                 return "final06";
-            /*
             case "final06":
-                return "final07";
+                return "credits";
             case "final07":
                 return "final08";
             case "final08":
                 return "final09";
             case "final09":
-                return "final10";*/
+                return "final10";
             default:
                 return "mainMenu";
         }

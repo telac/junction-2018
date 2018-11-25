@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [ExecuteAlways]
 public class DualCameraController : MonoBehaviour
@@ -35,6 +36,9 @@ public class DualCameraController : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "credits") return;
+        if (SceneManager.GetActiveScene().name == "mainMenu") return;
+
         if (GameManager.Instance && GameManager.Instance.LightBall)
         {
             _lightCameraController.FollowTarget = GameManager.Instance.LightBall.gameObject;

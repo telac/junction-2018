@@ -8,28 +8,13 @@ public class LineController : MonoBehaviour, IPoolable
     public EdgeCollider2D Collider;
     public float CollisionWidth;
 
-
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-
-    }
-    public void ResetState() 
+    public void ResetState()
     {
         gameObject.SetActive(true);
     }
 
-    public void ReturnToPool() 
-    { 
+    public void ReturnToPool()
+    {
         gameObject.SetActive(false);
     }
-
-
-
-
 }
