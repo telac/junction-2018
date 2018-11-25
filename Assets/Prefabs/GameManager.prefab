@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1670336762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670336763}
+  - component: {fileID: 1670336764}
+  m_Layer: 0
+  m_Name: DeathSFXPSPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1670336763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670336762}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6699693398413568234}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1670336764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670336762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7813c9591bfff8c4db8547197435f9a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PooledObjectPrefab: {fileID: 1586029796840069248, guid: 2de49a66f739c1e44b21654fb3b01ef9,
+    type: 3}
+  WillGrow: 1
+  Container: {fileID: 3473413603432110703}
 --- !u!1 &198554384361584004
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,6 +127,7 @@ Transform:
   - {fileID: 8307129446076961937}
   - {fileID: 4628914125325875362}
   - {fileID: 8553286925473946047}
+  - {fileID: 1670336763}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,11 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ad55304513b584182596c0e319c2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevel: 
+  CurrentLevel: 
   BallPool: {fileID: 2430062089906173343}
   LinePool: {fileID: 3010478625585740099}
   GameState: 0
   GoalSFXPool: {fileID: 7307875609045356065}
+  DeathSFXPool: {fileID: 1670336764}
   FadeUI: {fileID: 1516040024240696, guid: 99ee9a3fbc819564298d0eb1f01be23b, type: 3}
   Spawner: {fileID: 0}
   LineManager: {fileID: 0}
@@ -120,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Lines: []
+  Energy: 0
 --- !u!1 &2778454558211057101
 GameObject:
   m_ObjectHideFlags: 0

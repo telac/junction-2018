@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState;
 
     public ParticleSystemPool GoalSFXPool;
+    public ParticleSystemPool DeathSFXPool;
 
     public GameObject FadeUI;
     [HideInInspector]
@@ -58,8 +59,8 @@ public class GameManager : MonoBehaviour
         _fadeUIController = fadeUI.GetComponent<FadeUIController>();
         _fadeUIController.SetFade(0f);
 
+        CurrentLevel = "final01";
         GameState = GameState.Begin;
-        Debug.Log("Press space to play");
     }
 
     public void ResetLevel()
@@ -69,7 +70,6 @@ public class GameManager : MonoBehaviour
         //LineManager.ResetLines(); 
         // Lines are removed with undo
         GameState = GameState.Begin;
-        Debug.Log("Press space to play");
     }
 
     public void EndLevel(string targetScene = "")
@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
         }
 
         GameState = GameState.ChangeLevel;
-        Debug.Log("GG go to next level");
 
         StartCoroutine(StartLevelEndFade(targetScene));
     }
@@ -173,7 +172,6 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        Debug.Log("Game paused, press spacebar");
         GameState = GameState.Pause;
         foreach (var ball in BallPool.Pool)
         {
@@ -207,15 +205,40 @@ public class GameManager : MonoBehaviour
     {
         if (GameState != GameState.GameOver)
         {
-            Debug.Log("GG skeletons got you");
             Pause();
             GameState = GameState.GameOver;
         }
 
     }
 
+
     public string NextLevel(string curLvl) {
-        return "";
+        switch (curLvl)
+        {
+            case "mainMenu":
+                return "final01";
+            case "final01":
+                return "final02";
+            case "final02":
+                return "final03";
+            case "final03":
+                return "final04";
+            case "final04":
+                return "final05";
+            /*case "final05":
+                return "final06";
+            case "final06":
+                return "final07";
+            case "final07":
+                return "final08";
+            case "final08":
+                return "final09";
+            case "final09":
+                return "final10";*/
+            default:
+                return "mainMenu";
+        }
+
     }
 
 }

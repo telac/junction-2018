@@ -8,6 +8,12 @@ public class Hazard : MonoBehaviour
     {
         if (other.tag == "LightBall" || other.tag == "DarkBall")
         {
+            if (GameManager.Instance.GameState == GameState.Play)
+            {
+                var sfx = GameManager.Instance.DeathSFXPool.GetPooledObject();
+                sfx.gameObject.transform.position = other.transform.position;
+            }
+
             GameManager.Instance.gameOver();
         }
     }
