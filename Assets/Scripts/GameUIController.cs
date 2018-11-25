@@ -30,7 +30,7 @@ public class GameUIController : MonoBehaviour
 
         EnergyBar.gameObject.SetActive(false);
 
-        if (GameManager.Instance.GameState == GameState.ChangeLevel)
+        if (GameManager.Instance == null || GameManager.Instance.GameState == GameState.ChangeLevel)
         {
             return;
         }

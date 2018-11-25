@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject FadeUI;
     [HideInInspector]
-    public Spawner Spawner;
+    public List<Spawner> Spawners;
     [HideInInspector]
     public LineManager LineManager;
     [HideInInspector]
@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
         _fadeUIController = fadeUI.GetComponent<FadeUIController>();
         _fadeUIController.SetFade(0f);
 
+        Spawners = new List<Spawner>();
+
         CurrentLevel = "final01";
         GameState = GameState.Begin;
     }
@@ -66,7 +68,10 @@ public class GameManager : MonoBehaviour
     public void ResetLevel()
     {
         // reset ball positions
-        Spawner.ResetBalls();
+        foreach (var spawner in Spawners)
+        {
+            spawner.ResetBalls();
+        }
         //LineManager.ResetLines(); 
         // Lines are removed with undo
         GameState = GameState.Begin;
@@ -81,6 +86,8 @@ public class GameManager : MonoBehaviour
         }
 
         GameState = GameState.ChangeLevel;
+
+        Spawners.Clear();
 
         StartCoroutine(StartLevelEndFade(targetScene));
     }
@@ -212,7 +219,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public string NextLevel(string curLvl) {
+    public string NextLevel(string curLvl)
+    {
         switch (curLvl)
         {
             case "mainMenu":
@@ -225,8 +233,9 @@ public class GameManager : MonoBehaviour
                 return "final04";
             case "final04":
                 return "final05";
-            /*case "final05":
+            case "final05":
                 return "final06";
+            /*
             case "final06":
                 return "final07";
             case "final07":

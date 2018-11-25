@@ -9,10 +9,8 @@ public class Spawner : MonoBehaviour
 
     void Awake()
     {
-        if(GameManager.Instance.Spawner == null) 
-        {
-            GameManager.Instance.Spawner = gameObject.GetComponent<Spawner>();
-        }
+        GameManager.Instance.Spawners.Add(this);
+
         if (LightSpawn)
         {
             SpawnBall(BallType.Light);
@@ -30,7 +28,7 @@ public class Spawner : MonoBehaviour
         ball.component.transform.position = gameObject.transform.position;
         if (type == BallType.Light)
         {
-            GameManager.Instance.LightBall = ball.component; 
+            GameManager.Instance.LightBall = ball.component;
         }
         else
         {
@@ -39,7 +37,8 @@ public class Spawner : MonoBehaviour
         ball.component.Pause();
     }
 
-    public void ResetBalls() {
+    public void ResetBalls()
+    {
         if (LightSpawn)
         {
             GameManager.Instance.LightBall.ReturnToPool();
