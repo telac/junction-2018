@@ -47,13 +47,7 @@ public class ScrollText : MonoBehaviour
                 gameObject.layer = 9;
             }
 
-            // sori henri
-            // REEEEEEEEEEEEEEEEEEEEEE
-            //var camera = GameManager.Instance.LightCamera.Camera;
-            //var aspectRatio = camera.aspect;
-            //var bottom = camera.transform.position.y - camera.orthographicSize * aspectRatio;
-            //var screenBottom = new Vector2(transform.position.x, bottom - 2);
-            //var inWorld = Camera.allCameras[1].ScreenToWorldPoint(screenBottom);
+            // nothing to be seen here
             CreditsText.rectTransform.position = new Vector3(CreditsText.rectTransform.position.x, _startY, CreditsText.rectTransform.position.z);
         }
     }
