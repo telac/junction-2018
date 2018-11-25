@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomAudioClip : MonoBehaviour
+public class RandomAudioClip : MonoBehaviour, IPoolable
 {
+    public float PitchChange;
+    private float _initialPitch;
     public List<AudioClip> Clips;
 
     private AudioSource _source;
 
     private bool _played;
 
+    public void ResetState()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void ReturnToPool()
+    {
+
+    }
+
     void Awake()
     {
         _source = GetComponent<AudioSource>();
+        _initialPitch = _source.pitch;
     }
 
     void Update()
@@ -32,6 +45,7 @@ public class RandomAudioClip : MonoBehaviour
             else
             {
                 _source.clip = Clips[Random.Range(0, Clips.Count)];
+                _source.pitch = _initialPitch + Random.Range(-PitchChange, PitchChange);
                 _source.Play();
                 _played = true;
             }

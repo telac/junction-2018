@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystemPool GoalSFXPool;
     public ParticleSystemPool DeathSFXPool;
 
+    public AudioEffectPool HitAudioPool;
+
     public GameObject FadeUI;
     [HideInInspector]
     public List<Spawner> Spawners;

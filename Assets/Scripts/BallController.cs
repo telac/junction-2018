@@ -14,6 +14,8 @@ public class BallController : MonoBehaviour, IPoolable
 
     private bool _spawnedGoalSFX;
 
+    private float _sinceLastHitSound;
+
     public void Play()
     {
         gameObject.GetComponent<Rigidbody2D>().simulated = true;
@@ -54,14 +56,27 @@ public class BallController : MonoBehaviour, IPoolable
 
     public void Update()
     {
+        _sinceLastHitSound += Time.deltaTime;
+
         if (gameObject.transform.position.y < -12)
         {
             GameManager.Instance.gameOver();
         }
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (_sinceLastHitSound > 0.2f)
+        {
+            _sinceLastHitSound = 0f;
+            GameManager.Instance.HitAudioPool.GetPooledObject();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (GameManager.Instance.GameState == GameState.ChangeLevel) return;
+
         if (other.CompareTag("WinCollision"))
         {
             if (!_spawnedGoalSFX)
