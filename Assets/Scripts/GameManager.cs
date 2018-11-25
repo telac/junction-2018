@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState;
 
     public ParticleSystemPool GoalSFXPool;
+    public ParticleSystemPool DeathSFXPool;
 
     public GameObject FadeUI;
     [HideInInspector]
@@ -214,7 +215,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public string NextLevel(string curLvl) {
+    public string NextLevel(string curLvl)
+    {
         return "";
     }
 
