@@ -245,11 +245,11 @@ public class GameManager : MonoBehaviour
             case "final06":
                 return "final07";
             case "final07":
-                return "credits";
+                return "final08";
             case "final08":
                 return "final09";
             case "final09":
-                return "final10";
+                return "credits";
             default:
                 return "mainMenu";
         }
