@@ -8,6 +8,8 @@ public class Hazard : MonoBehaviour
     {
         if (other.tag == "LightBall" || other.tag == "DarkBall")
         {
+            GameManager.Instance.HitAudioPool.GetPooledObject();
+
             if (GameManager.Instance.GameState == GameState.Play)
             {
                 var sfx = GameManager.Instance.DeathSFXPool.GetPooledObject();
