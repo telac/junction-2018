@@ -13,7 +13,7 @@ public class PoolableParticleSystem : MonoBehaviour, IPoolable
 
     public void ResetState()
     {
-
+        gameObject.SetActive(true);
     }
 
     public void ReturnToPool()
