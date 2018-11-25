@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
             case "final06":
                 return "final07";
             case "final07":
-                return "final08";
+                return "credits";
             case "final08":
                 return "final09";
             case "final09":
