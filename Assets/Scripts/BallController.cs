@@ -79,6 +79,8 @@ public class BallController : MonoBehaviour, IPoolable
 
         if (other.CompareTag("WinCollision"))
         {
+            GameManager.Instance.WinSoundPool.GetPooledObject();
+
             if (!_spawnedGoalSFX)
             {
                 _spawnedGoalSFX = true;

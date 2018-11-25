@@ -86,21 +86,25 @@ public class GameUIController : MonoBehaviour
 
     public void PausePress()
     {
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         GameManager.Instance.Pause();
     }
 
     public void PlayPress()
     {
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         GameManager.Instance.Play();
     }
 
     public void RestartPress()
     {
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         GameManager.Instance.ResetLevel();
     }
 
     public void UndoPress()
     {
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         GameManager.Instance.Undo();
     }
 }

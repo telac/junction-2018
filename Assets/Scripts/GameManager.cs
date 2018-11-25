@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystemPool DeathSFXPool;
 
     public AudioEffectPool HitAudioPool;
+    public AudioEffectPool WinSoundPool;
+    public AudioEffectPool UIAudioPool;
 
     public GameObject FadeUI;
     [HideInInspector]
