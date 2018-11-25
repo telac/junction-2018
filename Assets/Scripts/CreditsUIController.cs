@@ -8,6 +8,7 @@ public class CreditsUIController : MonoBehaviour
     public void ReplayPressed()
     {
         if (_pressed) return;
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         _pressed = true;
         GameManager.Instance.EndLevel();
     }
