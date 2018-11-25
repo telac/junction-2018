@@ -9,7 +9,7 @@ public class MenuUIController : MonoBehaviour
     public void PressPlay()
     {
         if (_pressed) return;
-
+        GameManager.Instance.UIAudioPool.GetPooledObject();
         _pressed = true;
         GameManager.Instance.EndLevel();
     }

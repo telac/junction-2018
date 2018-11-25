@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public AudioEffectPool HitAudioPool;
     public AudioEffectPool WinSoundPool;
+    public AudioEffectPool UIAudioPool;
 
     public GameObject FadeUI;
     [HideInInspector]

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3859297058199252674}
   - component: {fileID: 3859297058199252672}
   m_Layer: 0
-  m_Name: WinSounds
+  m_Name: UISounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.307
+  m_Volume: 0.402
   m_Pitch: 0.87
   Loop: 0
   Mute: 0
@@ -142,4 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PitchChange: 0.03
   Clips:
-  - {fileID: 8300000, guid: b10e55c0fc997be44a7faa84a61b1c18, type: 3}
+  - {fileID: 8300000, guid: 1efa7ab6141336a4db6227d324297a7c, type: 3}
+  - {fileID: 8300000, guid: c609eade4c8da7c4f950e0bf4ac65a17, type: 3}
+  - {fileID: 8300000, guid: 5d64d136d63d5414b8153e0100e4b6f0, type: 3}
+  - {fileID: 8300000, guid: 92ea802c28d24c34c9d4293a9715a30a, type: 3}
