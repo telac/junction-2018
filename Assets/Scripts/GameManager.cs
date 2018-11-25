@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         Spawners = new List<Spawner>();
 
-        CurrentLevel = "final01";
+        CurrentLevel = SceneManager.GetActiveScene().name;
         GameState = GameState.Begin;
     }
 
