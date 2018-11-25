@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         _fadeUIController = fadeUI.GetComponent<FadeUIController>();
         _fadeUIController.SetFade(0f);
 
+        CurrentLevel = "final01";
         GameState = GameState.Begin;
         Debug.Log("Press space to play");
     }
@@ -104,6 +105,8 @@ public class GameManager : MonoBehaviour
         // reset lines
         LineManager.ResetLines();
         // load next level
+        Debug.Log("LOAD:");
+        Debug.Log(sceneName);
         SceneManager.LoadScene(sceneName);
         CurrentLevel = sceneName;
         Fade(1.25f, 0f);
@@ -215,7 +218,43 @@ public class GameManager : MonoBehaviour
     }
 
     public string NextLevel(string curLvl) {
-        return "";
+        Debug.Log(curLvl);
+        switch (curLvl)
+        {
+            case "mainMenu":
+                return "final01";
+                break;
+            case "final01":
+                return "final02";
+                break;
+            case "final02":
+                return "final03";
+                break;
+            case "final03":
+                return "final04";
+                break;
+            case "final04":
+                return "final05";
+                break;
+            case "final05":
+                return "final06";
+                break;
+            case "final06":
+                return "final07";
+                break;
+            case "final07":
+                return "final08";
+                break;
+            case "final08":
+                return "final09";
+                break;
+            case "final09":
+                return "final10";
+                break;
+            default:
+                return "mainMenu";
+                break;
+        }
     }
 
 }
