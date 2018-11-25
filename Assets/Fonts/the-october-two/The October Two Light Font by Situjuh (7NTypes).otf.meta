@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1ac3670eb947f2d4bac738a81e9ebf03
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: The October Two Light
+  fontNames:
+  - The October Two Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 12481e36969038a4a8fbe39b80ca5a00, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
