@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartLevelEndFade(string nextScene)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Fade(1.25f, 1f);
         yield return new WaitForSeconds(1.25f);
         GotoNextLevel(nextScene);

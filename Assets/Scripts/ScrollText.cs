@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScrollText : MonoBehaviour
 {
     public Text CreditsText;
+    public GameObject ReplayButton;
     private Canvas _canvas;
     public float ScrollSpeed;
     private int _count;
@@ -16,6 +17,7 @@ public class ScrollText : MonoBehaviour
         _count = 1;
         _canvas = GetComponent<Canvas>();
         _startY = CreditsText.rectTransform.position.y;
+        ReplayButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,7 +26,12 @@ public class ScrollText : MonoBehaviour
         //transform.Translate(Vector3.up * Time.deltaTime * ScrollSpeed);
         CreditsText.rectTransform.position += Vector3.up * Time.deltaTime * ScrollSpeed;
 
-        if (CreditsText.rectTransform.position.y > 18)
+        if (_count > 1)
+        {
+            ReplayButton.SetActive(true);
+        }
+
+        if (CreditsText.rectTransform.position.y > 24)
         {
             _count += 1;
             if (_count % 2 == 0)
