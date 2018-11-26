@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour
         CurrentLevel = sceneName;
         Fade(1.25f, 0f);
         Pause();
+        // set gamestate to begin
+        GameState = GameState.Begin;
     }
 
     void Update()

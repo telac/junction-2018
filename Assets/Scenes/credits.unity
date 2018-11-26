@@ -619,6 +619,9 @@ MonoBehaviour:
   CreditsText: {fileID: 2067181342}
   ReplayButton: {fileID: 1808265316}
   ScrollSpeed: 5
+  FirstLayer: 10
+  SecondLayer: 9
+  ThirdLayer: 0
 --- !u!1001 &1297318693
 PrefabInstance:
   m_ObjectHideFlags: 0
