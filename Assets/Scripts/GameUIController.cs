@@ -10,6 +10,8 @@ public class GameUIController : MonoBehaviour
     public Button RestartButton;
     public Button UndoButton;
 
+    private UIButtonController _undoImage;
+
     private float _energyInitialWidth;
     public Image EnergyBar;
 
@@ -19,6 +21,8 @@ public class GameUIController : MonoBehaviour
     {
         _canvas = GetComponentInChildren<Canvas>();
         _energyInitialWidth = EnergyBar.rectTransform.rect.width / _canvas.scaleFactor;
+
+        _undoImage = UndoButton.GetComponentInChildren<UIButtonController>();
     }
 
     private void Update()
@@ -30,6 +34,7 @@ public class GameUIController : MonoBehaviour
 
         EnergyBar.gameObject.SetActive(false);
 
+        // If changing level, hide all UI
         if (GameManager.Instance == null || GameManager.Instance.GameState == GameState.ChangeLevel)
         {
             return;
@@ -37,51 +42,34 @@ public class GameUIController : MonoBehaviour
 
         EnergyBar.gameObject.SetActive(true);
         var energyT = GameManager.Instance.LineManager.Energy / 30f;
+        // If a minimal amount of energy is remaining, round to 0
         if (energyT < 5f / 30f)
         {
             energyT = 0f;
         }
         energyT = Mathf.Clamp(energyT, 0f, 1f);
+
         var offset = -20 - (1f - energyT) * _energyInitialWidth;
-        //EnergyBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _energyInitialWidth * energyT);
         EnergyBar.rectTransform.offsetMax = new Vector2(offset, EnergyBar.rectTransform.offsetMax.y);
 
-        // Restart is always available
-        RestartButton.gameObject.SetActive(true);
-        RestartButton.interactable = true;
+        // Restart is only available if state is Paused or GameOver
+        var restartActive = GameManager.Instance.GameState == GameState.Pause || GameManager.Instance.GameState == GameState.GameOver;
+        RestartButton.gameObject.SetActive(restartActive);
 
-        UndoButton.gameObject.SetActive(true);
-        UndoButton.interactable = true;
+        // Undo is only available in Begin, and interactable if there are lines to remove
+        var undoActive = GameManager.Instance.GameState == GameState.Begin || GameManager.Instance.GameState == GameState.Pause;
+        var undoAvailable = GameManager.Instance.LineManager.Lines.Count != 0;
+        UndoButton.gameObject.SetActive(undoActive);
+        _undoImage.SetActive(undoAvailable);
+        UndoButton.interactable = undoAvailable;
 
-        if (GameManager.Instance.GameState != GameState.Begin)
-        {
-            UndoButton.interactable = false;
-        }
+        // Play is only available in Begin and Pause
+        var playActive = GameManager.Instance.GameState == GameState.Begin || GameManager.Instance.GameState == GameState.Pause;
+        PlayButton.gameObject.SetActive(playActive);
 
-        // If in begin or play, make restart inactive
-        if (GameManager.Instance.GameState == GameState.Begin || GameManager.Instance.GameState == GameState.Play)
-        {
-            RestartButton.interactable = false;
-        }
-
-        if (GameManager.Instance.GameState == GameState.Begin)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
-
-        if (GameManager.Instance.LineManager.Lines.Count == 0)
-        {
-            UndoButton.interactable = false;
-        }
-
-        if (GameManager.Instance.GameState == GameState.Pause)
-        {
-            PlayButton.gameObject.SetActive(true);
-        }
-        if (GameManager.Instance.GameState == GameState.Play)
-        {
-            PauseButton.gameObject.SetActive(true);
-        }
+        // Pause is enabled only if state is Play
+        var pauseActive = GameManager.Instance.GameState == GameState.Play;
+        PauseButton.gameObject.SetActive(pauseActive);
     }
 
     public void PausePress()

@@ -58,8 +58,13 @@ public class BallController : MonoBehaviour, IPoolable
     {
         _sinceLastHitSound += Time.deltaTime;
 
-        if (gameObject.transform.position.y < -12)
+        if (gameObject.transform.position.y < -12 && GameManager.Instance.GameState == GameState.Play)
         {
+            var sfx = GameManager.Instance.DeathSFXPool.GetPooledObject();
+            sfx.gameObject.transform.position = transform.position;
+
+            GameManager.Instance.HitAudioPool.GetPooledObject();
+
             GameManager.Instance.gameOver();
         }
     }
